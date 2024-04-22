@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #88a587;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #3d4b3c;
+}
+
+.cart p {
+  margin-left: 0.5rem;
+}
+
+button {
+  background-color: #d9e8d9;
+  color: #546653;
+  border: none;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.95);
+  background-color: #88a587;
+}
+
+.close-btn {
+  margin-bottom: 20px;
+}
+
+.pay-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.pay-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #516850;
+  color: #dceadc;
+}
+
+.cart-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: #d9e8d9;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  z-index: 1000;
+  padding-top: 30px;
+}
+
+.cart-modal-hidden {
+  display: none;
+}
+
+.close-btn {
+  background-color: #516850;
+  color: #dceadc;
+  border: none;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.cart-modal ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-modal li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-modal img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.cart-modal button {
+  margin-left: auto;
+}
+
+.header-email {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: #3b493a;
+}
+
+@media (max-width: 768px) {
+  .header,
+  .cart,
+  .pay-btn-container,
+  .header-email {
+    display: block;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .cart p,
+  .pay-btn {
+    margin: auto;
+    display: block;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+
+  .logout-btn {
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0.5rem 1rem;
+  }
+
+  .header-email,
+  .cart p,
+  .pay-btn,
+  button {
+    font-size: 0.8rem;
+  }
+
+  .cart-modal {
+    width: 100%;
+  }
+}

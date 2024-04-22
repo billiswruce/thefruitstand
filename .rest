@@ -1,7 +1,7 @@
 get http://localhost:3000/
 
 ###
-post http://localhost:3000/create-user
+prsost http://localhost:3000/create-customer
 
 ###
-put http://localhost:3000/update-user
+put http://localhost:3000/update-customer
