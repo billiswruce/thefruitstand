@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "express": "^4.19.2",
     "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
     "nodemon": "^3.1.0"
   }
 }
