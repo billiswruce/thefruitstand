@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  image: string;
-}
+import logo from "./img/fruitbowl.png";
+import { Admin } from "./components/Admin";
+import { Product } from "./models/Product";
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -28,13 +24,13 @@ function App() {
   }, []);
 
   const addToCart = (product: Product) => {
-    setCart([...cart, product]); // Lägger till produkten i kundvagnen
+    setCart([...cart, product]);
     console.log("Product added to cart:", product);
   };
 
   return (
     <>
-      <h1>Frukt</h1>
+      <img src={logo} alt="Frukt" className="fruitbowl" />
       <ul className="product-list">
         {products.map((product) => (
           <li key={product._id}>
@@ -46,11 +42,9 @@ function App() {
               />
               <div className="product-info">
                 <p>
-                  {product.name} - {product.price} kr
+                  {product.name} - {product.price} SEK
                 </p>
-                <button onClick={() => addToCart(product)}>
-                  Lägg till i kundvagn
-                </button>
+                <button onClick={() => addToCart(product)}>Add to Cart</button>
               </div>
             </div>
           </li>
@@ -60,7 +54,7 @@ function App() {
         <div>
           <h2>Kundvagn</h2>
           <ul>
-            {cart.map((item: any, index: number) => (
+            {cart.map((item, index) => (
               <li key={index}>
                 {item.name} - {item.price} kr
               </li>
@@ -68,6 +62,7 @@ function App() {
           </ul>
         </div>
       )}
+      <Admin />
     </>
   );
 }
