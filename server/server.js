@@ -6,30 +6,29 @@ const Customers = require("./models/customers");
 const Product = require("./models/products");
 const Orders = require("./models/orders");
 
-// Etablera en permanent anslutning till MongoDB
-mongoose
-  .connect("mongodb://localhost:27017/shop")
-  .then(() => {
-    console.log("Successfully connected to database".green);
-  })
-  .catch((err) => {
-    console.error("Failed to connect to database".red, err.message);
-  });
-
-////////////////////////////////////////PRODUCTS//////////////////////////////////
+// hämtar produkter
 app.get("/", async (request, response) => {
   try {
-    const result = await Product.find();
-    response.send(result);
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
+
+    Product.find().then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
   } catch (error) {
-    console.error(error);
-    response.status(500).send("Failed to retrieve products");
+    console.log(error);
   }
 });
 
 // Lägger till produkter
 app.post("/create-product", async (request, response) => {
   try {
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
+
     const product = new Product({
       _id: "321",
       name: "test produkt 50",
@@ -40,72 +39,148 @@ app.post("/create-product", async (request, response) => {
       status: "active",
     });
 
-    const result = await product.save();
-    response.send(result);
+    product.save().then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
   } catch (error) {
-    console.error(error);
-    response.status(500).send("Failed to create product");
+    console.log(error);
   }
 });
 
-// Uppdaterar existerande produkt
+// Uppdaterar existerande produkter
 app.put("/update-product", async (request, response) => {
   try {
-    const result = await Product.findByIdAndUpdate(
-      "321",
-      { description: "en rolig sak" },
-      { new: true }
-    );
-    response.send(result);
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected"));
+
+    Products.findByIdAndUpdate("321", {
+      description: "en rolig sak",
+    }).then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
   } catch (error) {
-    console.error(error);
-    response.status(500).send("Failed to update product");
+    console.log(error);
   }
 });
 
-//////////////////////////////////////////////////////USERS////////////////////////////////////////////////////
+//saker till ordrar
+app.get("/orders", async (request, response) => {
+  try {
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
 
+    Orders.find().then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/create-order", async (request, response) => {
+  try {
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
+
+    const order = new Orders({
+      _id: "678",
+      customer: "test@testsson.test",
+      orderDate: new Date(),
+      status: "unpaid",
+      totalPrice: 20,
+      paymentId: "unpaid",
+    });
+    order.save().then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.put("/update-order", async (request, response) => {
+  try {
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected"));
+
+    Orders.findByIdAndUpdate("678", {
+      status: "paid",
+    }).then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//saker till användare
+// Hämtar användare
 app.get("/customers", async (request, response) => {
   try {
-    const result = await Customers.find();
-    response.send(result);
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
+
+    Customers.find().then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
   } catch (error) {
-    console.error(error);
-    response.status(500).send("Failed to retrieve customers");
+    console.log(error);
   }
 });
 
 // Lägger till användare
 app.post("/create-customer", async (request, response) => {
   try {
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
+
     const customer = new Customers({
-      _id: "glass@glassbilen.se",
-      firstName: "Jennie",
-      lastName: "Gla",
-      address: "Glassgatan 23",
+      _id: "nurydberg@najssomfan.se",
+      firstName: "Nur",
+      lastName: "Rydberg",
+      address: "Kungsgatan 1",
       password: "1234",
     });
 
-    const result = await customer.save();
-    response.send(result);
+    customer.save().then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
+    clear;
   } catch (error) {
-    console.error(error);
-    response.status(500).send("Failed to create customer");
+    console.log(error);
   }
 });
 
 // Uppdaterar existerande användare
 app.put("/update-customer", async (request, response) => {
   try {
-    const result = await Customers.findByIdAndUpdate(
-      "glass@glassbilen.se",
-      { firstName: "Jennie" },
-      { new: true }
-    );
-    response.send(result);
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
+
+    Customers.findByIdAndUpdate("nurydberg@najssomfan.se", {
+      firstName: "Emelie",
+      lastName: "Granath",
+      address: "Drottninggatan",
+    }).then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
   } catch (error) {
-    console.error(error);
-    response.status(500).send("Failed to update customer");
+    console.log(error);
   }
 });
 
