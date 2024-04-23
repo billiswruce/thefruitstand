@@ -7,6 +7,22 @@ const Product = require("./models/products");
 const Orders = require("./models/orders");
 
 // hämtar produkter
+app.get("/", async (request, response) => {
+  try {
+    await mongoose
+      .connect("mongodb://localhost:27017/shop")
+      .then(console.log("connected to database"));
+
+    Product.find().then((result) => {
+      response.send(result);
+      mongoose.connection.close();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//AGGREGATION FÖR ALLA GET:
 app.get("/orders-with-details", async (req, res) => {
   try {
     await mongoose
@@ -65,35 +81,21 @@ app.get("/orders-with-details", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-// app.get("/", async (request, response) => {
-//   try {
-//     await mongoose
-//       .connect("mongodb://localhost:27017/shop")
-//       .then(console.log("connected to database"));
-
-//     Product.find().then((result) => {
-//       response.send(result);
-//       mongoose.connection.close();
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
 
 // Lägger till produkter
 app.post("/create-product", async (request, response) => {
   try {
     await mongoose
       .connect("mongodb://localhost:27017/shop")
-      .then(console.log("connected to database"));
+      .then(console.log("created product"));
 
     const product = new Product({
-      _id: "321",
-      name: "test produkt 50",
-      description: "...",
-      price: 300,
-      image: "imgurl",
-      inStock: 50,
+      name: "Grapes",
+      description: "Grapes",
+      price: 39,
+      image:
+        "https://images.pexels.com/photos/708777/pexels-photo-708777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      inStock: 30,
       status: "active",
     });
 

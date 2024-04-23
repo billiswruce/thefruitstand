@@ -18,6 +18,10 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+ul {
+  list-style-type: none;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -39,4 +43,29 @@
 
 .read-the-docs {
   color: #888;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+li {
+  flex: 0 0 auto;
+  margin: 0.5rem;
+}
+
+.product-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-wrapper {
+  text-align: center;
+}
+
+.product-info {
+  margin-top: 0.5rem;
 }
