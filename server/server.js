@@ -7,20 +7,78 @@ const Product = require("./models/products");
 const Orders = require("./models/orders");
 
 // hämtar produkter
-app.get("/", async (request, response) => {
+app.get("/orders-with-details", async (req, res) => {
   try {
     await mongoose
       .connect("mongodb://localhost:27017/shop")
       .then(console.log("connected to database"));
+    const pipeline = [
+      {
+        $lookup: {
+          from: "lineItems",
+          localField: "orderId",
+          foreignField: "id",
+          as: "lineItems",
+          pipeline: [
+            {
+              $lookup: {
+                from: "products",
+                localField: "productId",
+                foreignField: "id",
+                as: "linkedProduct",
+              },
+            },
+            {
+              $addFields: {
+                linkedProduct: {
+                  $first: "$linkedProduct",
+                },
+              },
+            },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          from: "customers",
+          localField: "customerId",
+          foreignField: "_Id",
+          as: "linkedCustomer",
+        },
+      },
+      {
+        $addFields: {
+          linkedCustomer: {
+            $first: "$linkedCustomer",
+          },
+          calculatedTotal: {
+            $sum: "$lineItems.totalPrice",
+          },
+        },
+      },
+    ];
 
-    Product.find().then((result) => {
-      response.send(result);
-      mongoose.connection.close();
-    });
+    const ordersWithDetails = await Orders.aggregate(pipeline);
+    res.json(ordersWithDetails);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+// app.get("/", async (request, response) => {
+//   try {
+//     await mongoose
+//       .connect("mongodb://localhost:27017/shop")
+//       .then(console.log("connected to database"));
+
+//     Product.find().then((result) => {
+//       response.send(result);
+//       mongoose.connection.close();
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 // Lägger till produkter
 app.post("/create-product", async (request, response) => {
@@ -67,20 +125,20 @@ app.put("/update-product", async (request, response) => {
 });
 
 //saker till ordrar
-app.get("/orders", async (request, response) => {
-  try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("connected to database"));
+// app.get("/orders", async (request, response) => {
+//   try {
+//     await mongoose
+//       .connect("mongodb://localhost:27017/shop")
+//       .then(console.log("connected to database"));
 
-    Orders.find().then((result) => {
-      response.send(result);
-      mongoose.connection.close();
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
+//     Orders.find().then((result) => {
+//       response.send(result);
+//       mongoose.connection.close();
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 app.post("/create-order", async (request, response) => {
   try {
@@ -124,20 +182,20 @@ app.put("/update-order", async (request, response) => {
 
 //saker till användare
 // Hämtar användare
-app.get("/customers", async (request, response) => {
-  try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("connected to database"));
+// app.get("/customers", async (request, response) => {
+//   try {
+//     await mongoose
+//       .connect("mongodb://localhost:27017/shop")
+//       .then(console.log("connected to database"));
 
-    Customers.find().then((result) => {
-      response.send(result);
-      mongoose.connection.close();
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
+//     Customers.find().then((result) => {
+//       response.send(result);
+//       mongoose.connection.close();
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 // Lägger till användare
 app.post("/create-customer", async (request, response) => {
