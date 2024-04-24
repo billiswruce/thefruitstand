@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const Customers = require("./models/customers");
 const Product = require("./models/products");
 const Orders = require("./models/orders");
-
 const url = "mongodb://localhost:27017/shop";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,9 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 // hämtar produkter
 app.get("/", async (request, response) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("products yooo!"));
+    await mongoose.connect(url).then(console.log("products yooo!"));
 
     Product.find().then((result) => {
       response.send(result);
@@ -29,9 +26,7 @@ app.get("/", async (request, response) => {
 //AGGREGATION FÖR ALLA GET:
 app.get("/orders-with-details", async (req, res) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("order with details"));
+    await mongoose.connect(url).then(console.log("order with details"));
     const pipeline = [
       {
         $lookup: {
@@ -117,9 +112,7 @@ app.post("/create-product", async (req, res) => {
 // Uppdaterar existerande produkter
 app.put("/update-product", async (request, response) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("connected"));
+    await mongoose.connect(url).then(console.log("connected"));
 
     Products.findByIdAndUpdate("321", {
       description: "en rolig sak",
@@ -150,9 +143,7 @@ app.put("/update-product", async (request, response) => {
 
 app.post("/create-order", async (request, response) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("created order"));
+    await mongoose.connect(url).then(console.log("created order"));
 
     const order = new Orders({
       _id: "678",
@@ -173,9 +164,7 @@ app.post("/create-order", async (request, response) => {
 
 app.put("/update-order", async (request, response) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("update order"));
+    await mongoose.connect(url).then(console.log("update order"));
 
     Orders.findByIdAndUpdate("678", {
       status: "paid",
@@ -208,9 +197,7 @@ app.put("/update-order", async (request, response) => {
 // Lägger till användare
 app.post("/create-customer", async (request, response) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("customer created"));
+    await mongoose.connect(url).then(console.log("customer created"));
 
     const customer = new Customers({
       _id: "jennieg@jennie.se",
@@ -233,11 +220,9 @@ app.post("/create-customer", async (request, response) => {
 // Uppdaterar existerande användare
 app.put("/update-customer", async (request, response) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("customer updated"));
+    await mongoose.connect(url).then(console.log("customer updated"));
 
-    Customers.findByIdAndUpdate("nurydberg@najssomfan.se", {
+    Customers.findByIdAndUpdate("Jessi@jessison.se", {
       firstName: "Jessi",
       lastName: "Tell",
       address: "Tellusgatan 7",

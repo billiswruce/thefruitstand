@@ -42,10 +42,10 @@ export const AddProduct: React.FC<AddProductProps> = ({
     onClose();
   };
 
-  const createProduct = () => {
-    onAddProduct(product);
-    onClose();
-  };
+  // const createProduct = () => {
+  //   onAddProduct(product);
+  //   onClose();
+  // };
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -106,7 +106,7 @@ export const AddProduct: React.FC<AddProductProps> = ({
             <Button onClick={onClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={createProduct} type="submit" color="primary">
+            <Button onClick={handleSubmit} type="submit" color="primary">
               Add Product
             </Button>
           </DialogActions>
