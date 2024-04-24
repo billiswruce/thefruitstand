@@ -6,6 +6,10 @@ const Customers = require("./models/customers");
 const Product = require("./models/products");
 const Orders = require("./models/orders");
 
+const url = "mongodb://localhost:27017/shop";
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // hämtar produkter
 app.get("/", async (request, response) => {
   try {
@@ -83,28 +87,30 @@ app.get("/orders-with-details", async (req, res) => {
 });
 
 // Lägger till produkter
-app.post("/create-product", async (request, response) => {
+app.post("/create-product", async (req, res) => {
   try {
-    await mongoose
-      .connect("mongodb://localhost:27017/shop")
-      .then(console.log("created product"));
+    await mongoose.connect(url);
+
+    // Extract product data from the request body
+    const { name, description, price, image, inStock, status } = req.body;
 
     const product = new Product({
-      name: "Watermelon",
-      description: "Watermelon is a delicious fruit",
-      price: 119,
-      image:
-        "https://cdn.midjourney.com/fab8524e-6e88-4cf5-a838-329c5b6a6c67/0_2.webp",
-      inStock: 30,
-      status: "active",
+      name,
+      description,
+      price,
+      image,
+      inStock,
+      status,
     });
 
-    product.save().then((result) => {
-      response.send(result);
-      mongoose.connection.close();
-    });
+    // Save the product to the database
+    const result = await product.save();
+
+    res.send(result);
+    mongoose.connection.close();
   } catch (error) {
     console.log(error);
+    res.status(500).send("Error adding product");
   }
 });
 

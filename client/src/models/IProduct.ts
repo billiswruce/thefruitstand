@@ -1,12 +1,4 @@
-// export interface Product {
-//   _id: string;
-//   name: string;
-//   image: string;
-//   inStock: number;
-//   price: number;
-//   status: string;
-//   description: string;
-// }
+// Purpose: Interface for Product
 
 export interface IProduct {
   quantity: number;
@@ -15,4 +7,13 @@ export interface IProduct {
   name: string;
   price: number;
   image: string;
+}
+
+export interface ICreateProduct {
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  inStock: number;
+  status: string;
 }

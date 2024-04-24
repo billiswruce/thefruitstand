@@ -7,12 +7,12 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import { IProduct } from "../models/IProduct";
+import { ICreateProduct } from "../models/IProduct";
 
 interface AddProductProps {
   open: boolean;
   onClose: () => void;
-  onAddProduct: (product: IProduct) => void;
+  onAddProduct: (product: ICreateProduct) => void;
 }
 
 export const AddProduct: React.FC<AddProductProps> = ({
@@ -21,7 +21,7 @@ export const AddProduct: React.FC<AddProductProps> = ({
   onAddProduct,
 }) => {
   const [product, setProduct] = useState({
-    _id: "",
+    // _id: "",
     name: "",
     description: "",
     price: 0,
@@ -38,6 +38,11 @@ export const AddProduct: React.FC<AddProductProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    onAddProduct(product);
+    onClose();
+  };
+
+  const createProduct = () => {
     onAddProduct(product);
     onClose();
   };
@@ -101,7 +106,7 @@ export const AddProduct: React.FC<AddProductProps> = ({
             <Button onClick={onClose} color="primary">
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button onClick={createProduct} type="submit" color="primary">
               Add Product
             </Button>
           </DialogActions>
