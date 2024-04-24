@@ -18,13 +18,15 @@ interface ICartContext {
   cart: ICartItem[];
   addToCart: (product: IProduct) => void;
   removeFromCart: (product: IProduct) => void;
+  decreaseQuantity: (product: IProduct) => void; // Lägg till denna rad
   clearCart: () => void;
 }
 
-const initialValues = {
+const initialValues: ICartContext = {
   cart: [],
   addToCart: () => {},
   removeFromCart: () => {},
+  decreaseQuantity: () => {}, // Add this line
   clearCart: () => {},
 };
 
@@ -90,9 +92,25 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const decreaseQuantity = (product: IProduct) => {
+    const updatedCart = cart.map((item) => {
+      if (item.product._id === product._id && item.quantity > 1) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart }}>
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        decreaseQuantity, // Lägg till detta
+        clearCart,
+      }}>
       {children}
     </CartContext.Provider>
   );

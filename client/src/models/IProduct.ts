@@ -9,6 +9,8 @@
 // }
 
 export interface IProduct {
+  quantity: number;
+  product: any;
   _id: string;
   name: string;
   price: number;

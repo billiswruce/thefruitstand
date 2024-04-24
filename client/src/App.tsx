@@ -40,9 +40,7 @@ function App() {
                 <p>
                   {product.name} - {product.price} SEK
                 </p>
-                <button onClick={() => addToCart(product)}>
-                  kom en rolig anka
-                </button>
+                <button onClick={() => addToCart(product)}>Add to cart</button>
               </div>
             </div>
           </li>
