@@ -1,32 +1,27 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import logo from "./img/fruitbowl.png";
+import { Cart } from "./components/Cart";
 import { Admin } from "./components/Admin";
 import { IProduct } from "./models/IProduct";
-import { Cart } from "./components/Cart";
+import { useCart } from "./context/CartContext";
+import logo from "./img/fruitbowl.png";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [cart, setCart] = useState<IProduct[]>([]);
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const fetchProducts = async () => {
     try {
       const response = await fetch("/api/");
       const data = await response.json();
       setProducts(data);
-      console.log(data);
     } catch (error) {
-      console.error("Failed to fetch products:", error);
+      console.error("Error fetching products:", error);
     }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const addToCart = (product: IProduct) => {
-    setCart([...cart, product]);
-    console.log("Product added to cart:", product);
   };
 
   return (
@@ -45,13 +40,15 @@ function App() {
                 <p>
                   {product.name} - {product.price} SEK
                 </p>
-                <button onClick={() => addToCart(product)}>Add to Cart</button>
+                <button onClick={() => addToCart(product)}>
+                  kom en rolig anka
+                </button>
               </div>
             </div>
           </li>
         ))}
       </ul>
-      <Cart cart={cart} />
+      <Cart />
       <Admin />
     </>
   );
