@@ -32,7 +32,9 @@ export const Cart = () => {
 
   return (
     <>
-      <button onClick={toggleCart}>
+      <button
+        onClick={toggleCart}
+        style={{ position: "fixed", top: "10px", right: "10px" }}>
         <FaShoppingCart />
       </button>
       <Modal
@@ -42,8 +44,10 @@ export const Cart = () => {
         aria-describedby="modal-modal-description"
         style={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: "flex-start", // Changed from center to flex-start
+          justifyContent: "flex-end", // Changed from center to flex-end
+          height: "100vh", // Added to make modal full height
+          overflowY: "auto", // Added to handle scrolling
         }}>
         <div
           style={{
@@ -51,10 +55,9 @@ export const Cart = () => {
             padding: "20px",
             borderRadius: "10px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-            width: "40%",
-            maxWidth: "500px",
-            maxHeight: "80vh",
-            overflow: "auto",
+            width: "25%", // Changed from 40% to 25%
+            maxWidth: "300px", // Changed from 500px to 300px
+            minHeight: "100vh", // Changed from maxHeight to minHeight and set to 100vh
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
