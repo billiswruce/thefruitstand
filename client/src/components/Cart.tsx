@@ -55,9 +55,9 @@ export const Cart = () => {
             padding: "20px",
             borderRadius: "10px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-            width: "25%", // Changed from 40% to 25%
-            maxWidth: "300px", // Changed from 500px to 300px
-            minHeight: "100vh", // Changed from maxHeight to minHeight and set to 100vh
+            width: "25%",
+            maxWidth: "400px",
+            minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -94,15 +94,15 @@ export const Cart = () => {
                 <p>Pris: {item.product.price} SEK</p>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <button
-                    onClick={() => handleDecrement(item.product)}
-                    style={{ marginRight: "5px" }}>
-                    <FaMinus />
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button
                     onClick={() => handleIncrement(item.product)}
                     style={{ marginLeft: "5px" }}>
                     <FaPlus />
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button
+                    onClick={() => handleDecrement(item.product)}
+                    style={{ marginRight: "5px" }}>
+                    <FaMinus />
                   </button>
                 </div>
               </div>
