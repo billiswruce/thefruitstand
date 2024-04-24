@@ -4,7 +4,9 @@ import { Cart } from "./components/Cart";
 import { Admin } from "./components/Admin";
 import { IProduct } from "./models/IProduct";
 import { useCart } from "./context/CartContext";
-import logo from "./img/fruitbowl.png";
+// import logo1 from "./img/logo1.png";
+import logo2 from "./img/logo2.png";
+// import logo3 from "./img/logo3.png";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -26,8 +28,7 @@ function App() {
 
   return (
     <>
-      <img src={logo} alt="Frukt" className="fruitbowl" />
-
+      <img src={logo2} alt="Frukt" className="fruitbowl" />
       <ul className="product-list">
         {products.map((product) => (
           <li key={product._id}>

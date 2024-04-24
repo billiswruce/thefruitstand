@@ -1,5 +1,3 @@
-// Purpose: Interface for Product
-
 export interface IProduct {
   quantity: number;
   product: any;
