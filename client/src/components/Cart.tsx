@@ -70,7 +70,7 @@ export const Cart = () => {
             }}>
             X
           </button>
-          <h2>Kundvagn</h2>
+          <h2>Your Cart</h2>
           {cart.length > 0 ? (
             cart.map((item) => (
               <div
