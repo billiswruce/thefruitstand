@@ -5,6 +5,7 @@ import { Admin } from "./components/Admin";
 import { IProduct } from "./models/IProduct";
 import { useCart } from "./context/CartContext";
 import logo from "./img/fruitbowl.png";
+import Header from "./components/header";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -26,7 +27,13 @@ function App() {
 
   return (
     <>
+      <Header
+        toggleCart={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
       <img src={logo} alt="Frukt" className="fruitbowl" />
+
       <ul className="product-list">
         {products.map((product) => (
           <li key={product._id}>

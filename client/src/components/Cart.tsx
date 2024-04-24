@@ -51,16 +51,18 @@ export const Cart = () => {
             padding: "20px",
             borderRadius: "10px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-            width: "80%",
+            width: "40%",
+            maxWidth: "500px",
             maxHeight: "80vh",
             overflow: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}>
           <button
             onClick={toggleCart}
             style={{
-              position: "absolute",
-              right: "20px",
-              top: "20px",
+              alignSelf: "flex-end",
               border: "none",
               background: "none",
               fontSize: "large",
@@ -76,25 +78,29 @@ export const Cart = () => {
                 style={{
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "space-between",
                   marginBottom: "10px",
+                  width: "100%",
                 }}>
                 <img
                   src={item.product.image}
                   alt={item.product.name}
                   style={{ width: "50px", marginRight: "10px" }}
                 />
-                <div>
-                  <h4>{item.product.name}</h4>
-                  <p>Pris: {item.product.price} SEK</p>
-                  <div>
-                    <button onClick={() => handleDecrement(item.product)}>
-                      <FaMinus />
-                    </button>
-                    <span> {item.quantity} </span>
-                    <button onClick={() => handleIncrement(item.product)}>
-                      <FaPlus />
-                    </button>
-                  </div>
+                <h4 style={{ flex: 1 }}>{item.product.name}</h4>
+                <p>Pris: {item.product.price} SEK</p>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <button
+                    onClick={() => handleDecrement(item.product)}
+                    style={{ marginRight: "5px" }}>
+                    <FaMinus />
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button
+                    onClick={() => handleIncrement(item.product)}
+                    style={{ marginLeft: "5px" }}>
+                    <FaPlus />
+                  </button>
                 </div>
               </div>
             ))
