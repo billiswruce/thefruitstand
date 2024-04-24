@@ -1,36 +1,39 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import logo from "./img/fruitbowl.png";
+import { Cart } from "./components/Cart";
 import { Admin } from "./components/Admin";
-import { Product } from "./models/Product";
+import { IProduct } from "./models/IProduct";
+import { useCart } from "./context/CartContext";
+import logo from "./img/fruitbowl.png";
+import Header from "./components/header";
 
 function App() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const fetchProducts = async () => {
     try {
       const response = await fetch("/api/");
       const data = await response.json();
       setProducts(data);
-      console.log(data);
     } catch (error) {
-      console.error("Failed to fetch products:", error);
+      console.error("Error fetching products:", error);
     }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const addToCart = (product: Product) => {
-    setCart([...cart, product]);
-    console.log("Product added to cart:", product);
   };
 
   return (
     <>
+      <Header
+        toggleCart={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
       <img src={logo} alt="Frukt" className="fruitbowl" />
+
       <ul className="product-list">
         {products.map((product) => (
           <li key={product._id}>
@@ -44,24 +47,13 @@ function App() {
                 <p>
                   {product.name} - {product.price} SEK
                 </p>
-                <button onClick={() => addToCart(product)}>Add to Cart</button>
+                <button onClick={() => addToCart(product)}>Add to cart</button>
               </div>
             </div>
           </li>
         ))}
       </ul>
-      {cart.length > 0 && (
-        <div>
-          <h2>Kundvagn</h2>
-          <ul>
-            {cart.map((item, index) => (
-              <li key={index}>
-                {item.name} - {item.price} kr
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <Cart />
       <Admin />
     </>
   );

@@ -8,7 +8,9 @@
 //   description: string;
 // }
 
-export interface Product {
+export interface IProduct {
+  quantity: number;
+  product: any;
   _id: string;
   name: string;
   price: number;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AddProduct } from "./AddProduct";
-import { Product } from "../models/Product";
+import { IProduct } from "../models/IProduct";
 
 export const Admin = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -9,7 +9,7 @@ export const Admin = () => {
     setShowAddModal(!showAddModal);
   };
 
-  const handleAddProduct = async (product: Product) => {
+  const handleAddProduct = async (product: IProduct) => {
     //Lägg till logiken för att lägga till produkter här.
     console.log(product);
   };

@@ -7,12 +7,12 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import { Product } from "../models/Product";
+import { IProduct } from "../models/IProduct";
 
 interface AddProductProps {
   open: boolean;
   onClose: () => void;
-  onAddProduct: (product: Product) => void;
+  onAddProduct: (product: IProduct) => void;
 }
 
 export const AddProduct: React.FC<AddProductProps> = ({
