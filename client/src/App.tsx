@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./img/fruitbowl.png";
 import { Admin } from "./components/Admin";
-import { Product } from "./models/Product";
+import { IProduct } from "./models/IProduct";
+import { Cart } from "./components/Cart";
 
 function App() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [cart, setCart] = useState<IProduct[]>([]);
 
   const fetchProducts = async () => {
     try {
@@ -23,7 +24,7 @@ function App() {
     fetchProducts();
   }, []);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: IProduct) => {
     setCart([...cart, product]);
     console.log("Product added to cart:", product);
   };
@@ -50,18 +51,7 @@ function App() {
           </li>
         ))}
       </ul>
-      {cart.length > 0 && (
-        <div>
-          <h2>Kundvagn</h2>
-          <ul>
-            {cart.map((item, index) => (
-              <li key={index}>
-                {item.name} - {item.price} kr
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <Cart cart={cart} />
       <Admin />
     </>
   );

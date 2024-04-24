@@ -8,7 +8,7 @@
 //   description: string;
 // }
 
-export interface Product {
+export interface IProduct {
   _id: string;
   name: string;
   price: number;
