@@ -225,7 +225,7 @@ app.put("/update-customer", async (request, response) => {
 });
 
 mongoose.connect(url).then(() => {
-  console.log("connected to database");
+  console.log("Connected to db".rainbow.bold);
   app.listen(3000, () => {
     console.log("Server is running".rainbow.bold);
   });
