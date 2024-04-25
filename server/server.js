@@ -110,18 +110,39 @@ app.post("/create-product", async (req, res) => {
 });
 
 // Uppdaterar existerande produkter
-app.put("/update-product", async (request, response) => {
+app.put("/update-product/:id", async (request, response) => {
   try {
-    await mongoose.connect(url).then(console.log("connected"));
+    // Connect to the MongoDB database
+    await mongoose.connect(url);
 
-    Products.findByIdAndUpdate("321", {
-      description: "en rolig sak",
-    }).then((result) => {
-      response.send(result);
-      mongoose.connection.close();
-    });
+    // Extract product data from the request body
+    const { name, description, price, image, inStock, status } = request.body;
+
+    // Extract product ID from the request parameters
+    const productId = request.params.id;
+
+    // Find the product by ID and update it with the new data
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      {
+        name,
+        description,
+        price,
+        image,
+        inStock,
+        status,
+      },
+      { new: true }
+    ); // { new: true } option returns the updated document
+
+    // Send the updated product as a response
+    response.send(updatedProduct);
+
+    // Close the MongoDB connection
+    mongoose.connection.close();
   } catch (error) {
     console.log(error);
+    response.status(500).send("Error updating product");
   }
 });
 

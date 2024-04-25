@@ -8,6 +8,7 @@ export interface IProduct {
 }
 
 export interface ICreateProduct {
+  id?: string;
   name: string;
   description: string;
   price: number;
