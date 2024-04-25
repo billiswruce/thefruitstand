@@ -42,11 +42,6 @@ export const AddProduct: React.FC<AddProductProps> = ({
     onClose();
   };
 
-  // const createProduct = () => {
-  //   onAddProduct(product);
-  //   onClose();
-  // };
-
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add New Product</DialogTitle>
