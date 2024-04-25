@@ -9,16 +9,16 @@ import {
 } from "@mui/material";
 import { ICreateProduct } from "../models/IProduct";
 
-interface AddProductProps {
+interface EditProductProps {
   open: boolean;
   onClose: () => void;
-  onAddProduct: (product: ICreateProduct) => void;
+  onEditProduct: (product: ICreateProduct) => void;
 }
 
-export const AddProduct: React.FC<AddProductProps> = ({
+export const EditProduct: React.FC<EditProductProps> = ({
   open,
   onClose,
-  onAddProduct,
+  onEditProduct,
 }) => {
   const [product, setProduct] = useState({
     // _id: "",
@@ -38,7 +38,12 @@ export const AddProduct: React.FC<AddProductProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onAddProduct(product);
+    onEditProduct(product);
+    onClose();
+  };
+
+  const editProduct = () => {
+    onEditProduct(product);
     onClose();
   };
 
@@ -101,8 +106,8 @@ export const AddProduct: React.FC<AddProductProps> = ({
             <Button onClick={onClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleSubmit} type="submit" color="primary">
-              Add Product
+            <Button onClick={editProduct} type="submit" color="primary">
+              Edit Product
             </Button>
           </DialogActions>
         </form>
