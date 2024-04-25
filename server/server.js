@@ -1,6 +1,6 @@
-let express = require("express");
-let app = express();
-let colors = require("colors");
+const express = require("express");
+const app = express();
+const colors = require("colors");
 const mongoose = require("mongoose");
 const Customers = require("./models/customers");
 const Product = require("./models/products");
@@ -9,7 +9,7 @@ const url = "mongodb://localhost:27017/shop";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// hämtar produkter
+//HÄMTAR PRODUKTER
 app.get("/", async (request, response) => {
   try {
     Product.find().then((result) => {
@@ -20,7 +20,7 @@ app.get("/", async (request, response) => {
   }
 });
 
-//AGGREGATION FÖR ALLA GET:
+//AGGREGATION FÖR ALLA GET
 app.get("/orders-with-details", async (req, res) => {
   try {
     const pipeline = [
@@ -77,10 +77,9 @@ app.get("/orders-with-details", async (req, res) => {
   }
 });
 
-// Lägger till produkter
+// LÄGGER TILL PRODUKTER
 app.post("/create-product", async (req, res) => {
   try {
-    // Extract product data from the request body
     const { name, description, price, image, inStock, status } = req.body;
 
     const product = new Product({
@@ -91,8 +90,6 @@ app.post("/create-product", async (req, res) => {
       inStock,
       status,
     });
-
-    // Save the product to the database
     const result = await product.save();
 
     res.send(result);
@@ -102,7 +99,7 @@ app.post("/create-product", async (req, res) => {
   }
 });
 
-// Uppdaterar existerande produkter
+// UPPDATERAR PRODUKTER
 app.put("/update-product/:id", async (request, response) => {
   try {
     const { name, description, price, image, inStock, status } = request.body;
@@ -189,7 +186,7 @@ app.put("/update-order", async (request, response) => {
 //   }
 // });
 
-// Lägger till användare
+// LÄGGER TILL ANVÄNDARE
 app.post("/create-customer", async (request, response) => {
   try {
     const customer = new Customers({
