@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddProduct } from "./AddProduct";
-import { ICreateProduct } from "../models/IProduct";
+import { ICreateProduct, IProduct } from "../models/IProduct";
+import { EditProduct } from "./EditProduct";
 
 export const Admin = () => {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
-  const handleToggleAddModal = () => {
-    setShowAddModal(!showAddModal);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("/api/");
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const handleEditProduct = (product: ICreateProduct) => {
+    console.log("Edit product:", product);
   };
 
   const handleAddProduct = async (product: ICreateProduct) => {
@@ -30,15 +46,41 @@ export const Admin = () => {
     }
   };
 
+  const handleToggleAddModal = () => {
+    setShowAddModal(!showAddModal);
+  };
+
   return (
     <>
-      <h1>Admin</h1>
+      <h2>Admin</h2>
       <button onClick={handleToggleAddModal}>Add new Product</button>
       <AddProduct
         open={showAddModal}
         onClose={handleToggleAddModal}
         onAddProduct={handleAddProduct}
       />
+
+      <ul className="product-list">
+        {products.map((product) => (
+          <li key={product._id}>
+            <div className="product-wrapper">
+              <img
+                src={product.image}
+                style={{ width: "150px", height: "auto" }}
+              />
+            </div>
+            <div className="product-info">
+              {product.name} - {product.price} SEK
+              <button onClick={handleToggleAddModal}>Edit Product</button>
+              <EditProduct
+                open={showAddModal}
+                onClose={handleToggleAddModal}
+                onEditProduct={handleEditProduct}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
