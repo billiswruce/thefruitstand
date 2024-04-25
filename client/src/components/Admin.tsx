@@ -3,6 +3,8 @@ import { AddProduct } from "./AddProduct";
 import { ICreateProduct } from "../models/IProduct";
 import { IProduct } from "../models/IProduct";
 import { EditProduct } from "./EditProduct";
+import { FiEdit } from "react-icons/fi";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 export const Admin = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -85,6 +87,23 @@ export const Admin = () => {
     }
   };
 
+  const deleteProduct = async (productId: string) => {
+    try {
+      const response = await fetch(`/api/delete-product/${productId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        console.log("Product deleted:", productId);
+        fetchProducts();
+      } else {
+        console.error("Failed to delete product:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   return (
     <>
       <h1>Admin</h1>
@@ -109,7 +128,7 @@ export const Admin = () => {
                   {product.name} - {product.price} SEK
                 </p>
                 <button onClick={() => handleOpenEditModal(product._id)}>
-                  Edit Product
+                  <FiEdit />
                 </button>
                 {selectedProductId && (
                   <EditProduct
@@ -124,6 +143,9 @@ export const Admin = () => {
                     }
                   />
                 )}
+                <button onClick={() => deleteProduct(product._id)}>
+                  <FaRegTrashCan />
+                </button>
               </div>
             </div>
           </li>

@@ -20,6 +20,17 @@ app.get("/", async (request, response) => {
   }
 });
 
+app.delete("/delete-product/:id", async (request, response) => {
+  try {
+    const productId = request.params.id;
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+    response.send(deletedProduct);
+  } catch (error) {
+    console.log(error);
+    response.status(500).send("Error deleting product");
+  }
+});
+
 //AGGREGATION FÖR ALLA GET
 app.get("/orders-with-details", async (req, res) => {
   try {
