@@ -3,6 +3,7 @@ import App from "./App";
 import { Admin } from "./components/Admin";
 import { Confirmation } from "./components/Confirmation";
 import { NotFound } from "./components/NotFound";
+import OrdersList from "./components/OrdersPage";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "/confirmation",
         element: <Confirmation />,
+      },
+      {
+        path: "/orders",
+        element: <OrdersList />,
       },
     ],
   },

@@ -17,6 +17,14 @@ function App() {
   const fetchProducts = async () => {
     try {
       const response = await fetch("/api/");
+
+      if (!response.ok) {
+        const message = await response.text();
+        throw new Error(
+          `HTTP error! status: ${response.status}, message: ${message}`
+        );
+      }
+
       const data = await response.json();
       setProducts(data);
     } catch (error) {

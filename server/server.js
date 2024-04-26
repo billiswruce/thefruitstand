@@ -30,7 +30,7 @@ app.delete("/delete-product/:id", async (request, response) => {
   }
 });
 
-app.get("/orders-with-details", async (req, res) => {
+app.get("/orders", async (req, res) => {
   try {
     const pipeline = [
       {
@@ -146,23 +146,34 @@ app.put("/update-product/:id", async (request, response) => {
 //   }
 // });
 
-app.post("/create-order", async (request, response) => {
-  try {
-    const order = new Orders({
-      _id: "678",
-      customer: "test@testsson.test",
-      orderDate: new Date(),
-      status: "unpaid",
-      totalPrice: 20,
-      paymentId: "unpaid",
-    });
-    order.save().then((result) => {
-      response.send(result);
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
+// app.post("/create-order", async (request, response) => {
+//   try {
+//     const { customer, products } = request.body; // Extrahera kund och produkter från request body
+
+//     // Beräkna totalpriset för ordern baserat på produkternas pris och kvantitet
+//     const totalPrice = products.reduce((total, product) => {
+//       return total + product.price * product.quantity;
+//     }, 0);
+
+//     // Skapa en ny order med den extraherade informationen
+//     const order = new Orders({
+//       customer: customer, // Använd kundens e-postadress som kund-ID
+//       orderDate: new Date(),
+//       status: "unpaid",
+//       totalPrice: totalPrice, // Använd det beräknade totalpriset för ordern
+//       products: products, // Lägg till produkterna i ordern
+//     });
+
+//     // Spara den nya ordern i databasen
+//     const savedOrder = await order.save();
+
+//     // Skicka den sparade ordern som svar till klienten
+//     response.json(savedOrder);
+//   } catch (error) {
+//     console.error(error);
+//     response.status(500).json({ error: "Error creating order" });
+//   }
+// });
 
 app.put("/update-order", async (request, response) => {
   try {
@@ -193,24 +204,24 @@ app.put("/update-order", async (request, response) => {
 //   }
 // });
 
-app.post("/create-customer", async (request, response) => {
-  try {
-    const customer = new Customers({
-      _id: "jennieg@jennie.se",
-      firstName: "Jennie",
-      lastName: "Jennisson",
-      address: "Kungsgatan 1",
-      password: "1337",
-    });
+// app.post("/create-customer", async (request, response) => {
+//   try {
+//     const customer = new Customers({
+//       _id: "jennieg@jennie.se",
+//       firstName: "Jennie",
+//       lastName: "Jennisson",
+//       address: "Kungsgatan 1",
+//       password: "1337",
+//     });
 
-    customer.save().then((result) => {
-      response.send(result);
-    });
-    clear;
-  } catch (error) {
-    console.log(error);
-  }
-});
+//     customer.save().then((result) => {
+//       response.send(result);
+//     });
+//     clear;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 app.put("/update-customer", async (request, response) => {
   try {
