@@ -8,6 +8,7 @@ import "../style/Cart.css";
 export const Cart = () => {
   const { cart, increaseCart, decreaseCart, deleteCart } = useCart();
   const [openCart, setOpenCart] = useState(false);
+  const [email, setEmail] = useState("");
 
   const toggleCart = () => setOpenCart(!openCart);
 
@@ -29,6 +30,34 @@ export const Cart = () => {
       (total, item) => total + item.product.price * item.quantity,
       0
     );
+  };
+
+  const handlePayment = async () => {
+    try {
+      const response = await fetch("/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer: email, // Använd e-postadressen som kund-ID
+          products: cart.map((item) => ({
+            productId: item.product._id,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Order creation failed with status code: ${response.status} and status text: ${response.statusText}`
+        );
+      }
+
+      // Hantera svaret från servern om det behövs...
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -73,7 +102,15 @@ export const Cart = () => {
             <p className="empty-cart">Cart is empty</p>
           )}
           <h3>Total: {totalSum()} kr</h3>
-          <button className="pay-button">Go to payment</button>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
+          <button onClick={handlePayment} className="pay-button">
+            Go to payment
+          </button>
         </div>
       </Modal>
     </>

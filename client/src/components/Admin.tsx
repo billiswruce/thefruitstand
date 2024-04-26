@@ -115,12 +115,12 @@ export const Admin = () => {
         <button className="add-button" onClick={handleToggleAddModal}>
           +
         </button>
-        <button className="orders-button">Orders</button>
-        <AddProduct
-          open={showAddModal}
-          onClose={handleToggleAddModal}
-          onAddProduct={handleAddProduct}
-        />
+        <button className="orders-button">
+          <Link to="/orders" className="orders-link">
+            Orders
+          </Link>{" "}
+        </button>
+
         <Link to="/" className="back-button">
           Home
         </Link>
@@ -170,11 +170,9 @@ export const Admin = () => {
         <AddProduct
           onAddProduct={handleAddProduct}
           onClose={() => setShowAddModal(false)}
-          open={false}
+          open={showAddModal}
         />
       )}
     </>
   );
 };
-
-export default Admin;

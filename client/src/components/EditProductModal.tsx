@@ -98,7 +98,7 @@ export const EditProduct: React.FC<EditProductProps> = ({
               Cancel
             </Button>
             <Button onClick={handleSubmit} type="submit" color="primary">
-              Edit Product
+              Update
             </Button>
           </DialogActions>
         </form>
