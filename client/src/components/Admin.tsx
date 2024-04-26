@@ -122,7 +122,7 @@ export const Admin = () => {
           onAddProduct={handleAddProduct}
         />
         <Link to="/" className="back-button">
-          Back to App
+          Home
         </Link>
       </div>
 
