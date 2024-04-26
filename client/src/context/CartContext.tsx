@@ -10,17 +10,17 @@ import {
 
 interface ICartContext {
   cart: ICart[];
-  addToCart: (product: IProduct) => void;
-  removeFromCart: (product: IProduct) => void;
-  decreaseQuantity: (product: IProduct) => void; // Lägg till denna rad
+  increaseCart: (product: IProduct) => void;
+  decreaseCart: (product: IProduct) => void;
+  deleteCart: (product: IProduct) => void;
   clearCart: () => void;
 }
 
 const initialValues: ICartContext = {
   cart: [],
-  addToCart: () => {},
-  removeFromCart: () => {},
-  decreaseQuantity: () => {}, // Add this line
+  increaseCart: () => {},
+  decreaseCart: () => {},
+  deleteCart: () => {},
   clearCart: () => {},
 };
 
@@ -42,7 +42,7 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
     setCart([]);
   };
 
-  const addToCart = (product: IProduct) => {
+  const increaseCart = (product: IProduct) => {
     const clonedCart = [...cart];
 
     const existingProduct = clonedCart.find(
@@ -65,7 +65,17 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const removeFromCart = (product: IProduct) => {
+  const decreaseCart = (product: IProduct) => {
+    const updatedCart = cart.map((item) => {
+      if (item.product._id === product._id && item.quantity > 1) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  };
+
+  const deleteCart = (product: IProduct) => {
     const clonedCart = [...cart];
 
     const existingProduct = clonedCart.find(
@@ -86,23 +96,13 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const decreaseQuantity = (product: IProduct) => {
-    const updatedCart = cart.map((item) => {
-      if (item.product._id === product._id && item.quantity > 1) {
-        return { ...item, quantity: item.quantity - 1 };
-      }
-      return item;
-    });
-    setCart(updatedCart);
-  };
-
   return (
     <CartContext.Provider
       value={{
         cart,
-        addToCart,
-        removeFromCart,
-        decreaseQuantity, // Lägg till detta
+        increaseCart,
+        decreaseCart,
+        deleteCart,
         clearCart,
       }}>
       {children}

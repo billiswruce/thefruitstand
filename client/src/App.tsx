@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { Cart } from "./components/Cart";
 import { IProduct } from "./models/IProduct";
 import { useCart } from "./context/CartContext";
-// import logo1 from "./img/logo1.png";
 import logo2 from "./img/logo2.png";
-// import logo3 from "./img/logo3.png";
+import { FaLock } from "react-icons/fa";
+import "./App.css";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const { addToCart } = useCart();
+  const { increaseCart } = useCart();
 
   useEffect(() => {
     fetchProducts();
@@ -25,8 +24,15 @@ function App() {
     }
   };
 
+  const goToAdminPage = () => {
+    window.location.href = "/admin";
+  };
+
   return (
     <>
+      <button onClick={goToAdminPage} className="admin-button">
+        <FaLock />
+      </button>
       <img src={logo2} alt="Frukt" className="fruitbowl" />
       <ul className="product-list">
         {products.map((product) => (
@@ -34,14 +40,16 @@ function App() {
             <div className="product-wrapper">
               <img
                 src={product.image}
-                style={{ width: "200px" }}
+                className="product-image"
                 alt={product.name}
               />
               <div className="product-info">
                 <p>
                   {product.name} - {product.price} SEK
                 </p>
-                <button onClick={() => addToCart(product)}>Add to cart</button>
+                <button onClick={() => increaseCart(product)}>
+                  Add to cart
+                </button>
               </div>
             </div>
           </li>

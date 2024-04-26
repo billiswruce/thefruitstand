@@ -47,3 +47,27 @@ li {
 .product-info {
   margin-top: 0.5rem;
 }
+
+.product-image {
+  width: 200px;
+}
+
+.admin-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.admin-button:focus {
+  outline: none;
+}
+
+.admin-button svg {
+  fill: #939d90;
+  width: 24px;
+  height: 24px;
+}
