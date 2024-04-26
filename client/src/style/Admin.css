@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: flex-end; /* Justera till höger */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fixed-buttons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  z-index: 999; /* Säkerställer att knapparna ligger över resten av sidan */
+}
+
+.add-button,
+.back-button,
+.orders-button {
+  font-size: 1em;
+  padding: 10px;
+  background-color: #f5f3f3;
+  color: #6b7971;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-right: 10px; /* Justera avståndet mellan knapparna */
+}
+
+.add-button:hover,
+.back-button:hover,
+.orders-button:hover {
+  background-color: #b0bfb6;
+  color: #f5f3f3;
+}
