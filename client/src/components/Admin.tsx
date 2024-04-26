@@ -107,7 +107,13 @@ export const Admin = () => {
   return (
     <>
       <h1>Admin</h1>
-      <button onClick={handleToggleAddModal}>Add new Product</button>
+      <button
+        onClick={handleToggleAddModal}
+        style={{ fontSize: "1em", padding: "10px" }}>
+        Add Product
+        {/* <IoMdAddCircleOutline /> */}
+        {/* <GiFruitBowl /> */}
+      </button>
       <AddProduct
         open={showAddModal}
         onClose={handleToggleAddModal}

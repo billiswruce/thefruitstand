@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ICreateProduct } from "../models/IProduct";
 import {
   Dialog,
   DialogTitle,
@@ -7,7 +8,6 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import { ICreateProduct } from "../models/IProduct";
 
 interface AddProductProps {
   open: boolean;
@@ -21,7 +21,6 @@ export const AddProduct: React.FC<AddProductProps> = ({
   onAddProduct,
 }) => {
   const [product, setProduct] = useState({
-    // _id: "",
     name: "",
     description: "",
     price: 0,

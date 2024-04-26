@@ -9,7 +9,6 @@ const url = "mongodb://localhost:27017/shop";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//HÄMTAR PRODUKTER
 app.get("/", async (request, response) => {
   try {
     Product.find().then((result) => {
@@ -31,7 +30,6 @@ app.delete("/delete-product/:id", async (request, response) => {
   }
 });
 
-//AGGREGATION FÖR ALLA GET
 app.get("/orders-with-details", async (req, res) => {
   try {
     const pipeline = [
@@ -88,7 +86,6 @@ app.get("/orders-with-details", async (req, res) => {
   }
 });
 
-// LÄGGER TILL PRODUKTER
 app.post("/create-product", async (req, res) => {
   try {
     const { name, description, price, image, inStock, status } = req.body;
@@ -110,7 +107,6 @@ app.post("/create-product", async (req, res) => {
   }
 });
 
-// UPPDATERAR PRODUKTER
 app.put("/update-product/:id", async (request, response) => {
   try {
     const { name, description, price, image, inStock, status } = request.body;
@@ -197,7 +193,6 @@ app.put("/update-order", async (request, response) => {
 //   }
 // });
 
-// LÄGGER TILL ANVÄNDARE
 app.post("/create-customer", async (request, response) => {
   try {
     const customer = new Customers({
@@ -217,7 +212,6 @@ app.post("/create-customer", async (request, response) => {
   }
 });
 
-// Uppdaterar existerande användare
 app.put("/update-customer", async (request, response) => {
   try {
     Customers.findByIdAndUpdate("Jessi@jessison.se", {
