@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Cart } from "./components/Cart";
+import { Cart } from "./components/CartModal";
 import { IProduct } from "./models/IProduct";
 import { useCart } from "./context/CartContext";
 import logo2 from "./img/logo2.png";

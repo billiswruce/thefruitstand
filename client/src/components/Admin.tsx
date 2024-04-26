@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AddProduct } from "./AddProduct";
-import { ICreateProduct } from "../models/IProduct";
-import { IProduct } from "../models/IProduct";
-import { EditProduct } from "./EditProduct";
+import { AddProduct } from "./AddProductModal";
+import { ICreateProduct, IProduct } from "../models/IProduct";
+import { EditProduct } from "./EditProductModal";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashCan } from "react-icons/fa6";
 import "../style/Admin.css";
+import admin from "../img/admin.png";
 
 export const Admin = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -57,8 +57,8 @@ export const Admin = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Product added:", data);
-        fetchProducts(); // Hämta produkter igen för att uppdatera listan
-        setShowAddModal(false); // Dölj modalen för att lägga till produkt efter att produkten har lagts till
+        fetchProducts();
+        setShowAddModal(false);
       } else {
         console.error("Failed to add product:", response.statusText);
       }
@@ -110,8 +110,12 @@ export const Admin = () => {
 
   return (
     <>
+      <img src={admin} alt="Admin-logo" className="admin-img" />
       <div className="container">
-        <button onClick={handleToggleAddModal}>+</button>
+        <button className="add-button" onClick={handleToggleAddModal}>
+          +
+        </button>
+        <button className="orders-button">Orders</button>
         <AddProduct
           open={showAddModal}
           onClose={handleToggleAddModal}
@@ -121,7 +125,7 @@ export const Admin = () => {
           Back to App
         </Link>
       </div>
-      <h1>Admin</h1>
+
       <ul className="product-list">
         {products.map((product) => (
           <li key={product._id}>
@@ -172,3 +176,5 @@ export const Admin = () => {
     </>
   );
 };
+
+export default Admin;
