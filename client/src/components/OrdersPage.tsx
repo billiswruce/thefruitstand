@@ -28,7 +28,7 @@ function OrdersList() {
       </Link>
       <ul className="orders-list">
         {orders.map((order, index) => (
-          <li key={order._id} className="order">
+          <li key={order._id} className="order-products">
             <h2>Order Number: {index + 1}</h2>
             <p>Order ID: {order._id}</p>
             <p>Order Date: {order.orderDate}</p>
