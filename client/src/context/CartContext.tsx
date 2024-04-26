@@ -1,4 +1,5 @@
 import { IProduct } from "../models/IProduct";
+import { ICart } from "../models/ICart";
 import {
   PropsWithChildren,
   createContext,
@@ -7,15 +8,8 @@ import {
   useState,
 } from "react";
 
-interface ICartItem {
-  name: string | undefined;
-  image: string | undefined;
-  product: IProduct;
-  quantity: number;
-}
-
 interface ICartContext {
-  cart: ICartItem[];
+  cart: ICart[];
   addToCart: (product: IProduct) => void;
   removeFromCart: (product: IProduct) => void;
   decreaseQuantity: (product: IProduct) => void; // Lägg till denna rad
@@ -35,7 +29,7 @@ const CartContext = createContext<ICartContext>(initialValues);
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }: PropsWithChildren) => {
-  const [cart, setCart] = useState<ICartItem[]>(() => {
+  const [cart, setCart] = useState<ICart[]>(() => {
     const lsData = localStorage.getItem("cart");
     return lsData ? JSON.parse(lsData) : [];
   });
