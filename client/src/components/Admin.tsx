@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AddProduct } from "./AddProduct";
 import { ICreateProduct } from "../models/IProduct";
 import { IProduct } from "../models/IProduct";
 import { EditProduct } from "./EditProduct";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashCan } from "react-icons/fa6";
+import "../style/Admin.css";
 
 export const Admin = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -55,6 +57,8 @@ export const Admin = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Product added:", data);
+        fetchProducts(); // Hämta produkter igen för att uppdatera listan
+        setShowAddModal(false); // Dölj modalen för att lägga till produkt efter att produkten har lagts till
       } else {
         console.error("Failed to add product:", response.statusText);
       }
@@ -106,57 +110,65 @@ export const Admin = () => {
 
   return (
     <>
+      <div className="container">
+        <button onClick={handleToggleAddModal}>+</button>
+        <AddProduct
+          open={showAddModal}
+          onClose={handleToggleAddModal}
+          onAddProduct={handleAddProduct}
+        />
+        <Link to="/" className="back-button">
+          Back to App
+        </Link>
+      </div>
       <h1>Admin</h1>
-      <button
-        onClick={handleToggleAddModal}
-        style={{ fontSize: "1em", padding: "10px" }}>
-        Add Product
-        {/* <IoMdAddCircleOutline /> */}
-        {/* <GiFruitBowl /> */}
-      </button>
-      <AddProduct
-        open={showAddModal}
-        onClose={handleToggleAddModal}
-        onAddProduct={handleAddProduct}
-      />
-
       <ul className="product-list">
         {products.map((product) => (
           <li key={product._id}>
             <div className="product-wrapper">
               <img
                 src={product.image}
-                style={{ width: "190px", height: "200px" }}
+                className="product-image"
                 alt={product.name}
               />
               <div className="product-info">
-                <p>
-                  {product.name} - {product.price} SEK
-                </p>
-                <button onClick={() => handleOpenEditModal(product._id)}>
-                  <FiEdit />
-                </button>
-                {selectedProductId && (
-                  <EditProduct
-                    open={showEditModal}
-                    onClose={handleCloseEditModal}
-                    onEditProduct={handleEditProduct}
-                    productId={selectedProductId}
-                    product={
-                      products.find(
-                        (p) => p._id === selectedProductId
-                      ) as unknown as ICreateProduct
-                    }
-                  />
-                )}
-                <button onClick={() => deleteProduct(product._id)}>
-                  <FaRegTrashCan />
-                </button>
+                <div>
+                  <p>{product.name}</p>
+                  <p>{product.price} SEK</p>
+                </div>
+                <div className="button-group">
+                  <button onClick={() => handleOpenEditModal(product._id)}>
+                    <FiEdit />
+                  </button>
+                  <button onClick={() => deleteProduct(product._id)}>
+                    <FaRegTrashCan />
+                  </button>
+                </div>
               </div>
             </div>
           </li>
         ))}
       </ul>
+      {selectedProductId && (
+        <EditProduct
+          open={showEditModal}
+          onClose={handleCloseEditModal}
+          onEditProduct={handleEditProduct}
+          productId={selectedProductId}
+          product={
+            products.find(
+              (p) => p._id === selectedProductId
+            ) as unknown as ICreateProduct
+          }
+        />
+      )}
+      {showAddModal && (
+        <AddProduct
+          onAddProduct={handleAddProduct}
+          onClose={() => setShowAddModal(false)}
+          open={false}
+        />
+      )}
     </>
   );
 };
