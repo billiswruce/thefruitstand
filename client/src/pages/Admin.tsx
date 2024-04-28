@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AddProduct } from "./AddModal";
+import { AddProduct } from "../components/AddModal";
 import { ICreateProduct, IProduct } from "../models/IProduct";
-import { EditProduct } from "./EditModal";
+import { EditProduct } from "../components/EditModal";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashCan } from "react-icons/fa6";
 import "../style/Admin.css";

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import { Admin } from "./components/Admin";
-import { Confirmation } from "./components/Confirmation";
-import { NotFound } from "./components/NotFound";
-import OrdersList from "./components/OrdersPage";
+import { Admin } from "./pages/Admin";
+import { Confirmation } from "./pages/Confirmation";
+import { NotFound } from "./pages/NotFound";
+import OrdersList from "./pages/OrdersPage";
 
 export const router = createBrowserRouter([
   {
