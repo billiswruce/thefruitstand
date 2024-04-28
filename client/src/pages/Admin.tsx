@@ -108,6 +108,13 @@ export const Admin = () => {
 
   return (
     <>
+      {showAddModal && (
+        <AddProduct
+          onAddProduct={addProduct}
+          onClose={() => setShowAddModal(false)}
+          open={showAddModal}
+        />
+      )}
       <div className="d-flex justify-content-center align-items-center">
         <img src={admin} alt="Admin-logo" className="admin-img" />
       </div>
@@ -126,10 +133,10 @@ export const Admin = () => {
         </Link>
       </div>
 
-      <ul className="product-list">
+      <ul className="product-list d-flex flex-wrap justify-content-center shadow rounded">
         {products.map((product) => (
           <li key={product._id}>
-            <div className="product-wrapper">
+            <div className="product-wrapper text-center">
               <img
                 src={product.image}
                 className="product-image"
@@ -168,13 +175,6 @@ export const Admin = () => {
               (p) => p._id === selectedProductId
             ) as unknown as ICreateProduct
           }
-        />
-      )}
-      {showAddModal && (
-        <AddProduct
-          onAddProduct={addProduct}
-          onClose={() => setShowAddModal(false)}
-          open={showAddModal}
         />
       )}
     </>

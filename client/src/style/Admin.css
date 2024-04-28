@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: flex-end; /* Justera till höger */
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -60,6 +60,7 @@
 }
 
 .product-wrapper {
-  flex: 0 0 calc(33.33% - 20px); /* Minska bredden till ungefär en tredjedel, minus lite marginal */
-  margin: 10px; /* Lägg till lite marginal runt varje produkt */
+  flex: 0 0 calc(33.33% - 20px);
+  padding: 30px;
+  padding-top: 70px;
 }
