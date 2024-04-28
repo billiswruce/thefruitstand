@@ -1,8 +1,11 @@
+import { ReactNode } from "react";
+
 export interface LinkedCustomer {
   _id: string;
 }
 
 export interface LineItem {
+  amount: ReactNode;
   _id: string;
   linkedProduct: {
     name: string;

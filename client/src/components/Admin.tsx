@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { AddProduct } from "./AddModal";
 import { ICreateProduct, IProduct } from "../models/IProduct";
 import { EditProduct } from "./EditModal";
@@ -7,6 +7,7 @@ import { FiEdit } from "react-icons/fi";
 import { FaRegTrashCan } from "react-icons/fa6";
 import "../style/Admin.css";
 import admin from "../img/admin.png";
+import Button from "react-bootstrap/Button";
 
 export const Admin = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -30,21 +31,21 @@ export const Admin = () => {
     }
   };
 
-  const handleToggleAddModal = () => {
+  const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
   };
 
-  const handleOpenEditModal = (productId: string) => {
+  const openEditModal = (productId: string) => {
     setSelectedProductId(productId);
     setShowEditModal(true);
   };
 
-  const handleCloseEditModal = () => {
+  const closeEditModal = () => {
     setShowEditModal(false);
     setSelectedProductId(null);
   };
 
-  const handleAddProduct = async (product: ICreateProduct) => {
+  const addProduct = async (product: ICreateProduct) => {
     try {
       const response = await fetch("/api/create-product", {
         method: "POST",
@@ -67,10 +68,7 @@ export const Admin = () => {
     }
   };
 
-  const handleEditProduct = async (
-    productId: string,
-    product: ICreateProduct
-  ) => {
+  const editProduct = async (productId: string, product: ICreateProduct) => {
     try {
       const response = await fetch(`/api/update-product/${productId}`, {
         method: "PUT",
@@ -112,14 +110,14 @@ export const Admin = () => {
     <>
       <img src={admin} alt="Admin-logo" className="admin-img" />
       <div className="container">
-        <button className="add-button" onClick={handleToggleAddModal}>
-          +
-        </button>
-        <button className="orders-button">
+        <Button variant="light" className="add-button" onClick={toggleAddModal}>
+          Add
+        </Button>
+        <Button variant="light" className="orders-button">
           <Link to="/orders" className="orders-link">
             Orders
           </Link>{" "}
-        </button>
+        </Button>
 
         <Link to="/" className="back-button">
           Home
@@ -141,7 +139,7 @@ export const Admin = () => {
                   <p>{product.price} SEK</p>
                 </div>
                 <div className="button-group">
-                  <button onClick={() => handleOpenEditModal(product._id)}>
+                  <button onClick={() => openEditModal(product._id)}>
                     <FiEdit />
                   </button>
                   <button onClick={() => deleteProduct(product._id)}>
@@ -156,8 +154,8 @@ export const Admin = () => {
       {selectedProductId && (
         <EditProduct
           open={showEditModal}
-          onClose={handleCloseEditModal}
-          openEdit={handleEditProduct}
+          onClose={closeEditModal}
+          openEdit={editProduct}
           productId={selectedProductId}
           product={
             products.find(
@@ -168,7 +166,7 @@ export const Admin = () => {
       )}
       {showAddModal && (
         <AddProduct
-          onAddProduct={handleAddProduct}
+          onAddProduct={addProduct}
           onClose={() => setShowAddModal(false)}
           open={showAddModal}
         />

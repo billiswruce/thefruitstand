@@ -2,15 +2,9 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { ICreateProduct } from "../models/IProduct";
+import { IAddProduct } from "../models/IProduct";
 
-interface AddProductProps {
-  open: boolean;
-  onClose: () => void;
-  onAddProduct: (product: ICreateProduct) => void;
-}
-
-export const AddProduct: React.FC<AddProductProps> = ({
+export const AddProduct: React.FC<IAddProduct> = ({
   open,
   onClose,
   onAddProduct,
@@ -71,15 +65,6 @@ export const AddProduct: React.FC<AddProductProps> = ({
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Image URL</Form.Label>
-            <Form.Control
-              type="text"
-              name="image"
-              value={product.image}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
             <Form.Label>In Stock</Form.Label>
             <Form.Control
               type="number"
@@ -90,10 +75,22 @@ export const AddProduct: React.FC<AddProductProps> = ({
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Status</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Status</Form.Label>
+              <Form.Control
+                type="text"
+                name="status"
+                value={product.status}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Image URL</Form.Label>
             <Form.Control
               type="text"
-              name="status"
-              value={product.status}
+              name="image"
+              value={product.image}
               onChange={handleChange}
             />
           </Form.Group>

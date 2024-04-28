@@ -38,19 +38,26 @@ function OrdersList() {
               <Card.Body>
                 <Card.Title>Order ID: {order._id}</Card.Title>
                 <Card.Text>
-                  <p>Order Date: {order.orderDate}</p>
-                  <p>Status: {order.status}</p>
-                  <p>Total Price: {order.totalPrice} SEK</p>
+                  Order Date: {order.orderDate}
+                  <br />
+                  Status: {order.status}
+                  <br />
+                  Total Price: {order.totalPrice} SEK
+                  <br />
                   {order.linkedCustomer && (
-                    <p>Customer: {order.linkedCustomer._id}</p>
+                    <>
+                      Customer: {order.linkedCustomer._id}
+                      <br />
+                    </>
                   )}
                 </Card.Text>
                 <h3>Line Items:</h3>
                 <ListGroup variant="flush">
                   {order.lineItems.map((item: LineItem) => (
                     <ListGroup.Item key={item._id}>
-                      <p>Product: {item.linkedProduct.name}</p>
-                      <p>Quantity: {item.quantity}</p>
+                      Product: {item.linkedProduct.name}
+                      <br />
+                      Quantity: {item.amount}
                     </ListGroup.Item>
                   ))}
                 </ListGroup>

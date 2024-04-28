@@ -3,17 +3,9 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../style/Modal.css";
-import { ICreateProduct } from "../models/IProduct";
+import { ICreateProduct, editProduct } from "../models/IProduct";
 
-interface EditProductProps {
-  open: boolean;
-  onClose: () => void;
-  openEdit: (productId: string, product: ICreateProduct) => void;
-  productId: string;
-  product: ICreateProduct;
-}
-
-export const EditProduct: React.FC<EditProductProps> = ({
+export const EditProduct: React.FC<editProduct> = ({
   open,
   onClose,
   openEdit,
@@ -22,7 +14,7 @@ export const EditProduct: React.FC<EditProductProps> = ({
 }) => {
   const [localProduct, setLocalProduct] = useState<ICreateProduct>(product);
 
-  const handleChange = (
+  const handleUpdate = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setLocalProduct({ ...localProduct, [e.target.name]: e.target.value });
@@ -30,7 +22,7 @@ export const EditProduct: React.FC<EditProductProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    openEdit(productId, localProduct); // Use localProduct for submission
+    openEdit(productId, localProduct);
     onClose();
   };
 
@@ -47,7 +39,7 @@ export const EditProduct: React.FC<EditProductProps> = ({
               type="text"
               name="name"
               value={localProduct.name}
-              onChange={handleChange}
+              onChange={handleUpdate}
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -56,25 +48,16 @@ export const EditProduct: React.FC<EditProductProps> = ({
               type="text"
               name="description"
               value={localProduct.description}
-              onChange={handleChange}
+              onChange={handleUpdate}
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Price (SEK)</Form.Label>
             <Form.Control
               type="number"
               name="price"
               value={localProduct.price}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Image URL</Form.Label>
-            <Form.Control
-              type="text"
-              name="image"
-              value={localProduct.image}
-              onChange={handleChange}
+              onChange={handleUpdate}
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -83,7 +66,7 @@ export const EditProduct: React.FC<EditProductProps> = ({
               type="number"
               name="inStock"
               value={localProduct.inStock}
-              onChange={handleChange}
+              onChange={handleUpdate}
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -92,7 +75,16 @@ export const EditProduct: React.FC<EditProductProps> = ({
               type="text"
               name="status"
               value={localProduct.status}
-              onChange={handleChange}
+              onChange={handleUpdate}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Image URL</Form.Label>
+            <Form.Control
+              type="text"
+              name="image"
+              value={localProduct.image}
+              onChange={handleUpdate}
             />
           </Form.Group>
         </Form>

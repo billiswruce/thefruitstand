@@ -16,6 +16,11 @@
   z-index: 999; /* Säkerställer att knapparna ligger över resten av sidan */
 }
 
+.orders-link {
+  text-decoration: none;
+  color: #6b7971;
+}
+
 .add-button,
 .back-button,
 .orders-button {

@@ -1,5 +1,6 @@
 import React from "react";
 import { IProduct } from "../src/models/IProduct";
+import { ICartContext, ICartItem } from "../src/models/ICartContext";
 import {
   PropsWithChildren,
   createContext,
@@ -7,21 +8,6 @@ import {
   useEffect,
   useState,
 } from "react";
-
-interface ICartItem {
-  name: string | undefined;
-  image: string | undefined;
-  product: IProduct;
-  quantity: number;
-}
-
-interface ICartContext {
-  cart: ICartItem[];
-  addToCart: (product: IProduct) => void;
-  removeFromCart: (product: IProduct) => void;
-  decreaseQuantity: (product: IProduct) => void; // Lägg till denna rad
-  clearCart: () => void;
-}
 
 const initialValues: ICartContext = {
   cart: [],
