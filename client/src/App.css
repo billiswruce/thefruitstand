@@ -28,19 +28,6 @@ li {
   margin: 50px auto 20px;
 }
 
-.product-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.product-wrapper {
-  padding: 30px;
-}
-
-.product-info {
-  margin-top: 0.5rem;
-}
-
 .product-image {
   width: 200px;
 }
@@ -63,7 +50,6 @@ li {
   width: 24px;
   height: 24px;
 }
-
 .cart {
   position: fixed;
   top: 0;
