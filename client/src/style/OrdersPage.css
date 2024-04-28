@@ -1,50 +1,5 @@
-/* OrderPage.css */
-
-.orders-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-}
-
-.orders-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.order {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.order-info {
-  margin-bottom: 10px;
-}
-
-.order-info h3 {
-  margin-top: 0;
-}
-
-.line-items {
-  margin-top: 20px;
-}
-
-.line-item {
-  border-top: 1px solid #eee;
-  padding: 10px 0;
-}
-
-.line-item-info {
+.header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-}
-
-.product-info {
-  flex-grow: 1;
-}
-
-.order-products {
-  border: 1px solid #ccc;
-  background-color: rgb(209, 224, 209);
 }

@@ -1,5 +1,6 @@
 body,
 html {
+  position: relative;
   margin: 0;
   padding: 0;
   background-color: #d0d7ce;
@@ -10,23 +11,16 @@ html {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 ul {
   list-style-type: none;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 li {
   flex: 0 0 auto;
-  margin: 0.5rem;
 }
 
 .fruitbowl {
@@ -40,8 +34,7 @@ li {
 }
 
 .product-wrapper {
-  text-align: center;
-  padding: 100px;
+  padding: 30px;
 }
 
 .product-info {
@@ -53,13 +46,12 @@ li {
 }
 
 .admin-button {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
   margin-top: 5px;
+  background: none;
+  border: none;
 }
 
 .admin-button:focus {
@@ -70,4 +62,13 @@ li {
   fill: #939d90;
   width: 24px;
   height: 24px;
+}
+
+.cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 6px;
+  padding: 6px;
+  border-radius: 5px;
 }

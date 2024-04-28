@@ -1,51 +1,9 @@
-.modal-style {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.modal-container {
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  width: 50%;
-  max-width: 400px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.close-button {
-  align-self: flex-end;
-  border: none;
-  background: none;
-  font-size: large;
-  cursor: pointer;
-}
-
-.cart-button {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-}
-
 .cart-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
   width: 100%;
-}
-
-.cart-item h4 {
-  flex: 1;
-}
-
-.product-image-large {
-  width: 300px;
 }
 
 .cart-item .product-image {
@@ -60,7 +18,14 @@
 
 .increment-button,
 .decrement-button {
-  margin: 5px;
+  margin: 10px;
+}
+
+.increment-button {
+  background-color: #7aad7b;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .empty-cart {
@@ -75,9 +40,46 @@
 .pay-button {
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #93987f;
-  color: rgb(246, 246, 246);
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  background-color: #cacbc1;
+  border: 1px solid #d9d9d9;
+}
+
+.pay-button:hover {
+  background-color: #dcdcdc;
+}
+
+.modal-dialog {
+  width: 400px;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+}
+
+.modal-content {
+  min-height: 100vh;
+}
+
+.increment-button,
+.decrement-button {
+  margin-top: 20px;
+  font-size: 0.5em;
+  min-height: 20px;
+}
+
+.quantity {
+  margin-top: 15px;
+  min-height: 20px;
+}
+
+.form-spacing {
+  margin-bottom: 30px;
+}
+
+.cart-button svg {
+  fill: rgb(78, 109, 78); /* Byt ut 'green' mot den färg du vill ha */
 }

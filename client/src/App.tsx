@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Cart } from "./components/CartModal";
 import { IProduct } from "./models/IProduct";
@@ -38,24 +39,31 @@ function App() {
 
   return (
     <>
-      <button onClick={goToAdminPage} className="admin-button">
+      <div className="cart">
+        <Cart />
+      </div>
+      <button onClick={goToAdminPage} className="btn btn-light admin-button">
         <FaLock />
       </button>
-      <img src={logo2} alt="Frukt" className="fruitbowl" />
-      <ul className="product-list">
+      <div className="d-flex justify-content-center align-items-center">
+        <img src={logo2} alt="Frukt" className="fruitbowl" />
+      </div>
+      <ul className="product-list d-flex flex-wrap justify-content-center shadow rounded">
         {products.map((product) => (
-          <li key={product._id}>
-            <div className="product-wrapper">
+          <li key={product._id} className="m-2">
+            <div className="product-wrapper text-center">
               <img
                 src={product.image}
                 className="product-image"
                 alt={product.name}
               />
-              <div className="product-info">
+              <div className="product-info mt-2">
                 <p>
                   {product.name} - {product.price} SEK
                 </p>
-                <button onClick={() => increaseCart(product)}>
+                <button
+                  onClick={() => increaseCart(product)}
+                  className="btn btn-light">
                   Add to cart
                 </button>
               </div>
@@ -63,7 +71,6 @@ function App() {
           </li>
         ))}
       </ul>
-      <Cart />
     </>
   );
 }
