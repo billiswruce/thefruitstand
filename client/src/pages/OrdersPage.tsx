@@ -64,6 +64,8 @@ function OrdersList() {
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
+                <button className="btn btn-light">Edit</button>
+                <button className="btn btn-light">Delete</button>
               </Card.Body>
             </Card>
           </Col>

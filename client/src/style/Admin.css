@@ -13,7 +13,7 @@
   align-items: center;
   background-color: #ffffff;
   padding: 10px;
-  z-index: 999; /* Säkerställer att knapparna ligger över resten av sidan */
+  z-index: 999;
 }
 
 .orders-link {
@@ -32,7 +32,7 @@
   border-radius: 4px;
   text-decoration: none;
   cursor: pointer;
-  margin-right: 10px; /* Justera avståndet mellan knapparna */
+  margin-right: 10px;
 }
 
 .add-button:hover,
@@ -40,4 +40,26 @@
 .orders-button:hover {
   background-color: #b0bfb6;
   color: #f5f3f3;
+}
+
+.edit-delete-button {
+  border-radius: 10%;
+  background-color: #abbcab; /* Green */
+  margin-right: 10px;
+}
+
+.edit-delete-button:hover {
+  background-color: rgb(96, 119, 96);
+  color: white;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product-wrapper {
+  flex: 0 0 calc(33.33% - 20px); /* Minska bredden till ungefär en tredjedel, minus lite marginal */
+  margin: 10px; /* Lägg till lite marginal runt varje produkt */
 }

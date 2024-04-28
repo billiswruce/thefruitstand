@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
-import { FaPlus, FaMinus, FaShoppingCart, FaTimes } from "react-icons/fa";
+import { FaPlus, FaMinus, FaShoppingCart } from "react-icons/fa";
 import { IProduct } from "../models/IProduct";
 import "../style/Cart.css";
 
@@ -9,6 +9,8 @@ export const Cart = () => {
   const { cart, increaseCart, decreaseCart, deleteCart } = useCart();
   const [openCart, setOpenCart] = useState(false);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
 
   const toggleCart = () => setOpenCart(!openCart);
 
@@ -40,7 +42,9 @@ export const Cart = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          customer: email, // Använd e-postadressen som kund-ID
+          customer: email,
+          name: name,
+          address: address,
           products: cart.map((item) => ({
             productId: item.product._id,
             quantity: item.quantity,
@@ -60,7 +64,7 @@ export const Cart = () => {
 
   return (
     <>
-      <Button onClick={toggleCart} className="cart-button">
+      <Button variant="light" onClick={toggleCart} className="cart-button">
         <FaShoppingCart />
       </Button>
       <Modal show={openCart} onHide={toggleCart} className="modal-style">
@@ -100,9 +104,21 @@ export const Cart = () => {
           ) : (
             <p className="empty-cart">Cart is empty</p>
           )}
-          <h5>Total: {totalSum()} kr</h5>
+          <h5>Total: {totalSum()} SEK</h5>
           <Form>
-            <Form.Group className="mb-3">
+            <Form.Group className="form-spacing">
+              <Form.Control
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+              />
+              <Form.Control
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Enter your address"
+              />
               <Form.Control
                 type="email"
                 value={email}

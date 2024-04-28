@@ -18,7 +18,7 @@
 
 .increment-button,
 .decrement-button {
-  margin: 5px;
+  margin: 10px;
 }
 
 .increment-button {
@@ -50,6 +50,7 @@
 .pay-button:hover {
   background-color: #dcdcdc;
 }
+
 .modal-dialog {
   width: 400px;
   margin: 0 auto;
@@ -62,6 +63,7 @@
 .modal-content {
   min-height: 100vh;
 }
+
 .increment-button,
 .decrement-button {
   margin-top: 20px;
@@ -72,4 +74,12 @@
 .quantity {
   margin-top: 15px;
   min-height: 20px;
+}
+
+.form-spacing {
+  margin-bottom: 30px;
+}
+
+.cart-button svg {
+  fill: rgb(78, 109, 78); /* Byt ut 'green' mot den färg du vill ha */
 }

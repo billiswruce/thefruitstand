@@ -108,7 +108,9 @@ export const Admin = () => {
 
   return (
     <>
-      <img src={admin} alt="Admin-logo" className="admin-img" />
+      <div className="d-flex justify-content-center align-items-center">
+        <img src={admin} alt="Admin-logo" className="admin-img" />
+      </div>
       <div className="container">
         <Button variant="light" className="add-button" onClick={toggleAddModal}>
           Add
@@ -139,10 +141,14 @@ export const Admin = () => {
                   <p>{product.price} SEK</p>
                 </div>
                 <div className="button-group">
-                  <button onClick={() => openEditModal(product._id)}>
+                  <button
+                    className="edit-delete-button"
+                    onClick={() => openEditModal(product._id)}>
                     <FiEdit />
                   </button>
-                  <button onClick={() => deleteProduct(product._id)}>
+                  <button
+                    className="edit-delete-button"
+                    onClick={() => deleteProduct(product._id)}>
                     <FaRegTrashCan />
                   </button>
                 </div>
