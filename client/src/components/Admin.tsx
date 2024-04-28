@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AddProduct } from "./AddProductModal";
+import { AddProduct } from "./AddModal";
 import { ICreateProduct, IProduct } from "../models/IProduct";
-import { EditProduct } from "./EditProductModal";
+import { EditProduct } from "./EditModal";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashCan } from "react-icons/fa6";
 import "../style/Admin.css";
@@ -157,7 +157,7 @@ export const Admin = () => {
         <EditProduct
           open={showEditModal}
           onClose={handleCloseEditModal}
-          onEditProduct={handleEditProduct}
+          openEdit={handleEditProduct}
           productId={selectedProductId}
           product={
             products.find(

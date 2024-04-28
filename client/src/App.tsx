@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Cart } from "./components/CartModal";
 import { IProduct } from "./models/IProduct";
