@@ -146,46 +146,71 @@ app.put("/update-product/:id", async (request, response) => {
 //   }
 // });
 
-// app.post("/create-order", async (request, response) => {
-//   try {
-//     const { customer, products } = request.body; // Extrahera kund och produkter från request body
+app.post("/create-order", async (req, res) => {
+  console.log("Received create-order request with body:", req.body);
+  const {
+    customerEmail,
+    customerName,
+    customerAddress,
+    orderDate,
+    status,
+    totalPrice,
+    paymentId,
+  } = req.body;
 
-//     // Beräkna totalpriset för ordern baserat på produkternas pris och kvantitet
-//     const totalPrice = products.reduce((total, product) => {
-//       return total + product.price * product.quantity;
-//     }, 0);
+  const newOrder = new Orders({
+    _id: new mongoose.Types.ObjectId(),
+    customer: customerName,
+    customerEmail: customerEmail,
+    customerAddress: customerAddress,
+    orderDate: orderDate,
+    status: status,
+    totalPrice: totalPrice,
+    paymentId: paymentId,
+  });
 
-//     // Skapa en ny order med den extraherade informationen
-//     const order = new Orders({
-//       customer: customer, // Använd kundens e-postadress som kund-ID
-//       orderDate: new Date(),
-//       status: "unpaid",
-//       totalPrice: totalPrice, // Använd det beräknade totalpriset för ordern
-//       products: products, // Lägg till produkterna i ordern
-//     });
+  console.log("Attempting to save new order:", newOrder);
 
-//     // Spara den nya ordern i databasen
-//     const savedOrder = await order.save();
-
-//     // Skicka den sparade ordern som svar till klienten
-//     response.json(savedOrder);
-//   } catch (error) {
-//     console.error(error);
-//     response.status(500).json({ error: "Error creating order" });
-//   }
-// });
-
-app.put("/update-order", async (request, response) => {
   try {
-    Orders.findByIdAndUpdate("678", {
-      status: "paid",
-    }).then((result) => {
-      response.send(result);
-    });
-  } catch (error) {
-    console.log(error);
+    const savedOrder = await newOrder.save();
+    console.log("New order saved successfully:", savedOrder);
+    res.status(201).json(savedOrder);
+  } catch (err) {
+    console.error("Error saving order:", err);
+    res.status(500).json({ message: err.message });
   }
 });
+
+app.put("/update-order/:id", async (request, response) => {
+  const { id } = request.params;
+
+  try {
+    const updatedOrder = await Orders.findByIdAndUpdate(id, {
+      status: "paid",
+    });
+
+    if (updatedOrder) {
+      response.json(updatedOrder);
+    } else {
+      response.status(404).json({ message: "Order not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    response.status(500).json({ message: "Error updating order" });
+  }
+});
+
+// app.put("/update-order", async (request, response) => {
+//   try {
+//     Orders.findByIdAndUpdate("678", {
+//       status: "paid",
+//     }).then((result) => {
+//       response.send(result);
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 //saker till användare
 // Hämtar användare

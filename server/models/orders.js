@@ -11,6 +11,16 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
+    customerEmail: {
+      // Add the customerEmail field
+      type: String,
+      required: true,
+    },
+    customerAddress: {
+      // Add the customerAddress field
+      type: String,
+      required: true,
+    },
     orderDate: {
       type: Date,
       required: true,
