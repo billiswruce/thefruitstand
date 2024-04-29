@@ -3,9 +3,9 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../style/Modal.css";
-import { ICreateProduct, editProduct } from "../models/IProduct";
+import { ICreateProduct, IeditProduct } from "../models/IProduct";
 
-export const EditProduct: React.FC<editProduct> = ({
+export const EditProduct: React.FC<IeditProduct> = ({
   open,
   onClose,
   openEdit,

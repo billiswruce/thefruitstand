@@ -31,18 +31,9 @@ export const Admin = () => {
     }
   };
 
+  ///////////ADD/////////////
   const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
-  };
-
-  const openEditModal = (productId: string) => {
-    setSelectedProductId(productId);
-    setShowEditModal(true);
-  };
-
-  const closeEditModal = () => {
-    setShowEditModal(false);
-    setSelectedProductId(null);
   };
 
   const addProduct = async (product: ICreateProduct) => {
@@ -68,6 +59,17 @@ export const Admin = () => {
     }
   };
 
+  ///////////EDIT/////////////
+  const openEditModal = (productId: string) => {
+    setSelectedProductId(productId);
+    setShowEditModal(true);
+  };
+
+  const closeEditModal = () => {
+    setShowEditModal(false);
+    setSelectedProductId(null);
+  };
+
   const editProduct = async (productId: string, product: ICreateProduct) => {
     try {
       const response = await fetch(`/api/update-product/${productId}`, {
@@ -89,6 +91,7 @@ export const Admin = () => {
     }
   };
 
+  ///////////DELETE/////////////
   const deleteProduct = async (productId: string) => {
     try {
       const response = await fetch(`/api/delete-product/${productId}`, {
@@ -127,12 +130,10 @@ export const Admin = () => {
             Orders
           </Link>{" "}
         </Button>
-
         <Link to="/" className="back-button">
           Home
         </Link>
       </div>
-
       <ul className="product-list d-flex flex-wrap justify-content-center shadow rounded">
         {products.map((product) => (
           <li key={product._id}>

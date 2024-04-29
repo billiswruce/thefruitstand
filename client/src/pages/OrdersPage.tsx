@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Order, LineItem } from "../models/IOrders";
+import { IOrder, ILineItem } from "../models/IOrders";
 import ordersImg from "../img/orders.png";
 import "../style/OrdersPage.css";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function OrdersList() {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<IOrder[]>([]);
 
   useEffect(() => {
     fetchOrders();
@@ -39,33 +39,41 @@ function OrdersList() {
             <Card>
               <Card.Header as="h5">Order Number: {index + 1}</Card.Header>
               <Card.Body>
-                <Card.Title>Order ID: {order._id}</Card.Title>
                 <Card.Text>
-                  Order Date: {order.orderDate}
-                  <br />
-                  Status: {order.status}
-                  <br />
-                  Total Price: {order.totalPrice} SEK
-                  <br />
+                  Order ID: <h5>{order._id}</h5>
                   {order.linkedCustomer && (
                     <>
-                      Customer: {order.linkedCustomer._id}
-                      <br />
+                      Customer: <h4>{order.linkedCustomer._id}</h4>
                     </>
                   )}
+                  Address: <h5>{order.address}</h5>
+                  Order Date: <h5>{order.orderDate}</h5>
+                  Total Price: <h5>{order.totalPrice} SEK</h5>
+                  Status: <h5>{order.status}</h5>
                 </Card.Text>
-                <h3>Line Items:</h3>
                 <ListGroup variant="flush">
-                  {order.lineItems.map((item: LineItem) => (
-                    <ListGroup.Item key={item._id}>
-                      Product: {item.linkedProduct.name}
-                      <br />
-                      Quantity: {item.amount}
-                    </ListGroup.Item>
+                  {order.lineItems.map((item: ILineItem) => (
+                    <div key={item._id} className="card mb-3">
+                      <div className="row no-gutters">
+                        <div className="col-md-4">
+                          <img
+                            src={item.linkedProduct.image}
+                            className="card-img-small"
+                            alt={item.linkedProduct.name}
+                          />
+                        </div>
+                        <div className="col-md-8">
+                          <div className="card-body">
+                            <h5 className="card-title">
+                              {item.linkedProduct.name}
+                            </h5>
+                            <p className="card-text">Quantity: {item.amount}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </ListGroup>
-                <button className="btn btn-light">Edit</button>
-                <button className="btn btn-light">Delete</button>
               </Card.Body>
             </Card>
           </Col>
