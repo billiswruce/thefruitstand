@@ -22,6 +22,5 @@ const lineItemSchema = new Schema({
   },
 });
 
-const Product = mongoose.model("lineItems", lineItemSchema);
-
-module.exports = { lineItemSchema };
+const lineItem = mongoose.model("lineitems", lineItemSchema);
+module.exports = lineItem;

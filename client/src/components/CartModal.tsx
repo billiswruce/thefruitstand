@@ -62,6 +62,7 @@ export const Cart = () => {
         status: "Paid",
         totalPrice: totalPrice,
         paymentId: "some-payment-id",
+        items: cartItems,
       }),
     });
 

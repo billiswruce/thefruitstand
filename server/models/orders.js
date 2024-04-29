@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema(
   {
     _id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     customer: {
@@ -12,12 +12,10 @@ const orderSchema = new Schema(
       required: true,
     },
     customerEmail: {
-      // Add the customerEmail field
       type: String,
       required: true,
     },
     customerAddress: {
-      // Add the customerAddress field
       type: String,
       required: true,
     },
@@ -37,6 +35,7 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
+    // lineItems: [lineItemsSchema],
   },
   { timestamps: true }
 );

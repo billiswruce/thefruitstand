@@ -1,10 +1,5 @@
 import { ReactNode } from "react";
 
-export interface ICustomer {
-  _id: string;
-  address: string;
-}
-
 export interface ILineItem {
   amount: ReactNode;
   _id: string;
@@ -16,7 +11,7 @@ export interface ILineItem {
 }
 
 export interface IOrder {
-  linkedCustomer: ICustomer;
+  customerEmail: string;
   _id: string;
   customer: string | null;
   address: string | null;

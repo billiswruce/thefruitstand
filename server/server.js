@@ -6,6 +6,7 @@ const Customers = require("./models/customers");
 const Product = require("./models/products");
 const Orders = require("./models/orders");
 const url = "mongodb://localhost:27017/shop";
+const LineItems = require("./models/lineItems");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,16 +36,16 @@ app.get("/orders", async (req, res) => {
     const pipeline = [
       {
         $lookup: {
-          from: "lineItems",
-          localField: "orderId",
-          foreignField: "id",
+          from: "lineitems",
+          localField: "_id",
+          foreignField: "orderId",
           as: "lineItems",
           pipeline: [
             {
               $lookup: {
                 from: "products",
                 localField: "productId",
-                foreignField: "id",
+                foreignField: "_id",
                 as: "linkedProduct",
               },
             },
@@ -61,8 +62,8 @@ app.get("/orders", async (req, res) => {
       {
         $lookup: {
           from: "customers",
-          localField: "customerId",
-          foreignField: "_Id",
+          localField: "customer",
+          foreignField: "_id",
           as: "linkedCustomer",
         },
       },
@@ -175,6 +176,15 @@ app.post("/create-order", async (req, res) => {
 
   try {
     const savedOrder = await newOrder.save();
+    req.body.items.forEach(async (item) => {
+      new LineItems({
+        orderId: savedOrder._id,
+        productId: item.productId,
+        quantity: item.quantity,
+        price: item.price,
+      }).save();
+      console.log(item);
+    });
     console.log("New order saved successfully:", savedOrder);
     res.status(201).json(savedOrder);
   } catch (err) {
