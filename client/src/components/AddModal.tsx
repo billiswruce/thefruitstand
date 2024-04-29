@@ -75,15 +75,12 @@ export const AddProduct: React.FC<IAddProduct> = ({
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Status</Form.Label>
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
-              <Form.Control
-                type="text"
-                name="status"
-                value={product.status}
-                onChange={handleChange}
-              />
-            </Form.Group>
+            <Form.Control
+              type="text"
+              name="status"
+              value={product.status}
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Image URL</Form.Label>
