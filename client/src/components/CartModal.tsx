@@ -40,9 +40,6 @@ export const Cart = () => {
       quantity: item.quantity,
       price: item.product.price,
     }));
-
-    console.log("Preparing to send order with cart items:", cartItems);
-
     const totalPrice = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0
