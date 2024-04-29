@@ -156,6 +156,7 @@ app.post("/create-order", async (req, res) => {
     status,
     totalPrice,
     paymentId,
+    products,
   } = req.body;
 
   const newOrder = new Orders({
@@ -167,6 +168,7 @@ app.post("/create-order", async (req, res) => {
     status: status,
     totalPrice: totalPrice,
     paymentId: paymentId,
+    products: products,
   });
 
   console.log("Attempting to save new order:", newOrder);

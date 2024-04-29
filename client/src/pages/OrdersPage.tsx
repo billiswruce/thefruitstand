@@ -24,7 +24,7 @@ function OrdersList() {
       console.error("Error fetching orders:", error);
     }
   };
-
+  console.log(orders);
   return (
     <div>
       <div className="header">
@@ -40,16 +40,21 @@ function OrdersList() {
               <Card.Header as="h5">Order Number: {index + 1}</Card.Header>
               <Card.Body>
                 <Card.Text>
-                  Order ID: <h5>{order._id}</h5>
-                  {order.linkedCustomer && (
+                  Order ID: <span className="text-value">#{order._id}</span>
+                  {order.customerEmail && (
                     <>
-                      Customer: <h4>{order.linkedCustomer._id}</h4>
+                      Customer:{" "}
+                      <span className="text-value">{order.customerEmail}</span>
                     </>
                   )}
-                  Address: <h5>{order.address}</h5>
-                  Order Date: <h5>{order.orderDate}</h5>
-                  Total Price: <h5>{order.totalPrice} SEK</h5>
-                  Status: <h5>{order.status}</h5>
+                  Address: <span className="text-value">{order.address}</span>
+                  Order Date:{" "}
+                  <span className="text-value">
+                    {new Date(order.orderDate).toLocaleDateString()}
+                  </span>
+                  Total Price:{" "}
+                  <span className="text-value">{order.totalPrice} SEK</span>
+                  Status: <span className="text-value">{order.status}</span>
                 </Card.Text>
                 <ListGroup variant="flush">
                   {order.lineItems.map((item: ILineItem) => (
@@ -67,7 +72,9 @@ function OrdersList() {
                             <h5 className="card-title">
                               {item.linkedProduct.name}
                             </h5>
-                            <p className="card-text">Quantity: {item.amount}</p>
+                            <p className="card-text">
+                              Quantity: {item.quantity}
+                            </p>
                           </div>
                         </div>
                       </div>
