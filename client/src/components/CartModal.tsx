@@ -35,30 +35,51 @@ export const Cart = () => {
   };
 
   const handlePayment = async () => {
-    try {
-      const response = await fetch("/create-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          customer: email,
-          name: name,
-          address: address,
-          products: cart.map((item) => ({
-            productId: item.product._id,
-            quantity: item.quantity,
-          })),
-        }),
-      });
+    const cartItems = cart.map((item) => ({
+      productId: item.product._id,
+      quantity: item.quantity,
+      price: item.product.price,
+    }));
 
-      if (!response.ok) {
-        throw new Error(
-          `Order creation failed with status code: ${response.status} and status text: ${response.statusText}`
-        );
-      }
-    } catch (error) {
-      console.error(error);
+    console.log("Preparing to send order with cart items:", cartItems);
+
+    const totalPrice = cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    console.log("Total price calculated:", totalPrice);
+
+    const response = await fetch("/api/create-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        customerEmail: email,
+        customerName: name,
+        customerAddress: address,
+        orderDate: new Date().toISOString(),
+        status: "Unpaid",
+        totalPrice: totalPrice,
+        paymentId: "some-payment-id",
+      }),
+    });
+
+    console.log("Order response received:", response);
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("Order created successfully:", responseData);
+      clearCart();
+      alert("Order created successfully. Order ID: " + responseData._id);
+    } else {
+      console.error(
+        "Failed to create order, response status:",
+        response.status
+      );
+      const errorResponse = await response.json();
+      console.error("Failed to create order, response data:", errorResponse);
+      alert("Failed to create order: " + errorResponse.message);
     }
   };
 
@@ -108,6 +129,12 @@ export const Cart = () => {
           <Form>
             <Form.Group className="form-spacing">
               <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+              />
+              <Form.Control
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -119,12 +146,6 @@ export const Cart = () => {
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter your address"
               />
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -133,10 +154,13 @@ export const Cart = () => {
             variant="light"
             onClick={handlePayment}
             className="pay-button">
-            Go to payment
+            Pay!
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   );
 };
+function clearCart() {
+  throw new Error("Function not implemented.");
+}
