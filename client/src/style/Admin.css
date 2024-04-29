@@ -44,13 +44,7 @@
 
 .edit-delete-button {
   border-radius: 10%;
-  background-color: #abbcab; /* Green */
   margin-right: 10px;
-}
-
-.edit-delete-button:hover {
-  background-color: rgb(96, 119, 96);
-  color: white;
 }
 
 .product-list {

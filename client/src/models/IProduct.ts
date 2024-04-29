@@ -23,7 +23,7 @@ export interface IAddProduct {
   onAddProduct: (product: ICreateProduct) => void;
 }
 
-export interface editProduct {
+export interface IeditProduct {
   open: boolean;
   onClose: () => void;
   openEdit: (productId: string, product: ICreateProduct) => void;

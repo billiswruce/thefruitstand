@@ -3,3 +3,7 @@
   flex-direction: column;
   align-items: center;
 }
+.card-img-small {
+  width: 80px;
+  height: auto;
+}

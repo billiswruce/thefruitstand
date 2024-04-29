@@ -1,5 +1,5 @@
 import { IProduct } from "../models/IProduct";
-import { ICart } from "../models/ICart";
+import { ICart, ICartContext } from "../models/ICartContext";
 import {
   PropsWithChildren,
   createContext,
@@ -7,14 +7,6 @@ import {
   useEffect,
   useState,
 } from "react";
-
-interface ICartContext {
-  cart: ICart[];
-  increaseCart: (product: IProduct) => void;
-  decreaseCart: (product: IProduct) => void;
-  deleteCart: (product: IProduct) => void;
-  clearCart: () => void;
-}
 
 const initialValues: ICartContext = {
   cart: [],
@@ -38,23 +30,19 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const clearCart = () => {
-    setCart([]);
-  };
-
   const increaseCart = (product: IProduct) => {
-    const clonedCart = [...cart];
+    const updatedCart = [...cart];
 
-    const existingProduct = clonedCart.find(
+    const existingProduct = updatedCart.find(
       (item) => item.product._id === product._id
     );
 
     if (existingProduct) {
       existingProduct.quantity++;
-      setCart(clonedCart);
+      setCart(updatedCart);
     } else {
       setCart([
-        ...clonedCart,
+        ...updatedCart,
         {
           product,
           quantity: 1,
@@ -76,9 +64,9 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
   };
 
   const deleteCart = (product: IProduct) => {
-    const clonedCart = [...cart];
+    const updatedCart = [...cart];
 
-    const existingProduct = clonedCart.find(
+    const existingProduct = updatedCart.find(
       (item) => item.product._id === product._id
     );
 
@@ -86,14 +74,18 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
       if (existingProduct.quantity > 1) {
         existingProduct.quantity--;
       } else {
-        const index = clonedCart.findIndex(
+        const index = updatedCart.findIndex(
           (item) => item.product._id === product._id
         );
-        clonedCart.splice(index, 1);
+        updatedCart.splice(index, 1);
       }
 
-      setCart(clonedCart);
+      setCart(updatedCart);
     }
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   return (

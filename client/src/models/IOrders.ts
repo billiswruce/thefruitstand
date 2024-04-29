@@ -1,25 +1,28 @@
 import { ReactNode } from "react";
 
-export interface LinkedCustomer {
+export interface ICustomer {
   _id: string;
+  address: string;
 }
 
-export interface LineItem {
+export interface ILineItem {
   amount: ReactNode;
   _id: string;
   linkedProduct: {
+    image: string | undefined;
     name: string;
   };
   quantity: number;
 }
 
-export interface Order {
+export interface IOrder {
+  linkedCustomer: ICustomer;
   _id: string;
   customer: string | null;
+  address: string | null;
   orderDate: string;
   status: string;
   totalPrice: number;
   paymentId: string | null;
-  linkedCustomer: LinkedCustomer;
-  lineItems: LineItem[];
+  lineItems: ILineItem[];
 }
