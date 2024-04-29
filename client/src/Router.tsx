@@ -1,9 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "./App";
 import { Admin } from "./pages/Admin";
-import { Confirmation } from "./pages/Confirmation";
 import { NotFound } from "./pages/NotFound";
 import OrdersList from "./pages/OrdersPage";
+import App from "./App";
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +18,6 @@ export const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin />,
-      },
-      {
-        path: "/confirmation",
-        element: <Confirmation />,
       },
       {
         path: "/orders",

@@ -11,6 +11,7 @@ export interface ILineItem {
 }
 
 export interface IOrder {
+  customerAddress: ReactNode;
   customerEmail: string;
   _id: string;
   customer: string | null;

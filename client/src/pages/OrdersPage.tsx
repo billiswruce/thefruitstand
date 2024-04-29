@@ -43,11 +43,13 @@ function OrdersList() {
                   Order ID: <span className="text-value">#{order._id}</span>
                   {order.customerEmail && (
                     <>
-                      Customer:{" "}
-                      <span className="text-value">{order.customerEmail}</span>
+                      Name: <span className="text-value">{order.customer}</span>
                     </>
                   )}
-                  Address: <span className="text-value">{order.address}</span>
+                  Mail:{" "}
+                  <span className="text-value">{order.customerEmail}</span>
+                  Address:{" "}
+                  <span className="text-value">{order.customerAddress}</span>
                   Order Date:{" "}
                   <span className="text-value">
                     {new Date(order.orderDate).toLocaleDateString()}
