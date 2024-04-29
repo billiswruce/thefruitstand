@@ -25,7 +25,6 @@ function App() {
           `HTTP error! status: ${response.status}, message: ${message}`
         );
       }
-
       const data = await response.json();
       setProducts(data);
     } catch (error) {
