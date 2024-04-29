@@ -31,8 +31,6 @@ export const Admin = () => {
     }
   };
 
-
-  
   ///////////ADD/////////////
   const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
@@ -133,7 +131,7 @@ export const Admin = () => {
           </Link>{" "}
         </Button>
         <Link to="/" className="back-button">
-          Home
+          Shop
         </Link>
       </div>
       <ul className="product-list d-flex flex-wrap justify-content-center shadow rounded">

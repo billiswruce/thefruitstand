@@ -6,7 +6,7 @@ import { IProduct } from "../models/IProduct";
 import "../style/Cart.css";
 
 export const Cart = () => {
-  const { cart, increaseCart, decreaseCart, deleteCart } = useCart();
+  const { cart, increaseCart, decreaseCart, deleteCart, clearCart } = useCart(); // Antag att clearCart nu är tillgänglig från useCart
   const [openCart, setOpenCart] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -18,23 +18,17 @@ export const Cart = () => {
 
   const handleDecrement = (product: IProduct) => {
     const item = cart.find((item) => item.product._id === product._id);
-    if (item) {
-      if (item.quantity > 1) {
-        decreaseCart(product);
-      } else {
-        deleteCart(product);
-      }
+    if (item && item.quantity > 1) {
+      decreaseCart(product);
+    } else {
+      deleteCart(product);
     }
   };
 
-  const totalSum = () => {
-    return cart.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
-    );
-  };
+  const totalSum = () =>
+    cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
 
-  const handlePayment = async () => {
+  const payOrder = async () => {
     const cartItems = cart.map((item) => ({
       productId: item.product._id,
       quantity: item.quantity,
@@ -44,40 +38,39 @@ export const Cart = () => {
       (total, item) => total + item.price * item.quantity,
       0
     );
-    console.log("Total price calculated:", totalPrice);
 
-    const response = await fetch("/api/create-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        customerEmail: email,
-        customerName: name,
-        customerAddress: address,
-        orderDate: new Date().toISOString(),
-        status: "Paid",
-        totalPrice: totalPrice,
-        paymentId: "some-payment-id",
-        items: cartItems,
-      }),
-    });
+    try {
+      const response = await fetch("/api/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customerEmail: email,
+          customerName: name,
+          customerAddress: address,
+          orderDate: new Date().toISOString(),
+          status: "Paid",
+          totalPrice: totalPrice,
+          paymentId: "Payment Id",
+          items: cartItems,
+        }),
+      });
 
-    console.log("Order response received:", response);
-
-    if (response.ok) {
-      const responseData = await response.json();
-      console.log("Order created successfully:", responseData);
-      clearCart();
-      alert("Order created successfully. Order ID: " + responseData._id);
-    } else {
-      console.error(
-        "Failed to create order, response status:",
-        response.status
-      );
-      const errorResponse = await response.json();
-      console.error("Failed to create order, response data:", errorResponse);
-      alert("Failed to create order: " + errorResponse.message);
+      if (response.ok) {
+        const responseData = await response.json();
+        clearCart();
+        // Tömmer input-fälten här efter att ordern har skapats framgångsrikt
+        setEmail("");
+        setName("");
+        setAddress("");
+        alert("Thank you for your booking! Order ID: " + responseData._id);
+      } else {
+        const errorResponse = await response.json();
+        alert("Failed to create order: " + errorResponse.message);
+      }
+    } catch (error) {
+      alert("Failed to process the order due to an error.");
     }
   };
 
@@ -105,17 +98,17 @@ export const Cart = () => {
                 </div>
                 <div className="quantity-controls">
                   <Button
-                    variant="success"
-                    onClick={() => handleIncrement(item.product)}
-                    className="increment-button">
-                    <FaPlus />
-                  </Button>
-                  <span className="quantity">{item.quantity}</span>
-                  <Button
                     variant="danger"
                     onClick={() => handleDecrement(item.product)}
                     className="decrement-button">
                     <FaMinus />
+                  </Button>
+                  <span className="quantity">{item.quantity}</span>
+                  <Button
+                    variant="success"
+                    onClick={() => handleIncrement(item.product)}
+                    className="increment-button">
+                    <FaPlus />
                   </Button>
                 </div>
               </div>
@@ -148,10 +141,7 @@ export const Cart = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="light"
-            onClick={handlePayment}
-            className="pay-button">
+          <Button variant="light" onClick={payOrder} className="pay-button">
             Pay!
           </Button>
         </Modal.Footer>
@@ -159,6 +149,3 @@ export const Cart = () => {
     </>
   );
 };
-function clearCart() {
-  throw new Error("Function not implemented.");
-}
