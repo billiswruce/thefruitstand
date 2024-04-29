@@ -59,7 +59,7 @@ export const Cart = () => {
         customerName: name,
         customerAddress: address,
         orderDate: new Date().toISOString(),
-        status: "Unpaid",
+        status: "Paid",
         totalPrice: totalPrice,
         paymentId: "some-payment-id",
       }),
