@@ -1,12 +1,12 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IOrder, ILineItem } from "../models/IOrders";
 import ordersImg from "../img/orders.png";
-import "../style/OrdersPage.css";
-import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "../style/OrdersPage.css";
 
 function OrdersList() {
   const [orders, setOrders] = useState<IOrder[]>([]);
@@ -43,11 +43,13 @@ function OrdersList() {
                   Order ID: <span className="text-value">#{order._id}</span>
                   {order.customerEmail && (
                     <>
-                      Customer:{" "}
-                      <span className="text-value">{order.customerEmail}</span>
+                      Name: <span className="text-value">{order.customer}</span>
                     </>
                   )}
-                  Address: <span className="text-value">{order.address}</span>
+                  Mail:{" "}
+                  <span className="text-value">{order.customerEmail}</span>
+                  Address:{" "}
+                  <span className="text-value">{order.customerAddress}</span>
                   Order Date:{" "}
                   <span className="text-value">
                     {new Date(order.orderDate).toLocaleDateString()}
