@@ -2,7 +2,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  padding-bottom: 40px;
 }
 
 .fixed-buttons {
@@ -19,27 +20,34 @@
 .orders-link {
   text-decoration: none;
   color: #6b7971;
+  font-weight: 600;
+}
+a.orders-link:hover {
+  color: #f5f3f3;
 }
 
 .add-button,
 .back-button,
 .orders-button {
-  font-size: 1em;
-  padding: 10px;
-  background-color: #f5f3f3;
-  color: #6b7971;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  cursor: pointer;
-  margin-right: 10px;
+  font-size: 1em !important;
+  padding: 10px !important;
+  background-color: #f5f3f3 !important;
+  color: #6b7971 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  margin-right: 10px !important;
+  font-family: Arial, sans-serif !important;
+  letter-spacing: normal !important;
+  font-weight: 600 !important;
 }
 
 .add-button:hover,
 .back-button:hover,
 .orders-button:hover {
-  background-color: #b0bfb6;
-  color: #f5f3f3;
+  background-color: #b0bfb6 !important;
+  color: #f5f3f3 !important;
 }
 
 .edit-delete-button {
@@ -51,6 +59,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-bottom: 90px;
+  padding-top: 30px;
+  margin-bottom: 250px;
+  margin-top: -5px;
 }
 
 .product-wrapper {

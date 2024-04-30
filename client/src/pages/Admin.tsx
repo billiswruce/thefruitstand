@@ -93,6 +93,13 @@ export const Admin = () => {
 
   ///////////DELETE/////////////
   const deleteProduct = async (productId: string) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
+
     try {
       const response = await fetch(`/api/delete-product/${productId}`, {
         method: "DELETE",

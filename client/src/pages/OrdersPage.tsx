@@ -24,7 +24,7 @@ function OrdersList() {
       console.error("Error fetching orders:", error);
     }
   };
-  console.log(orders);
+
   return (
     <div>
       <div className="header">
