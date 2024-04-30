@@ -1,6 +1,12 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/cFAPU0GE)
 # FSU23D Systemutveckling Uppgift 1
 
+<img width="1680" alt="1" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/2427cb16-db21-4b84-8c1c-928bf131196d">
+<img width="1680" alt="2" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/43e77745-4be8-41ff-9e5e-13cb1d62bf09">
+<img width="1680" alt="5" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/8bdb4f43-efab-420e-9295-e68d9925bca7">
+<img width="1255" alt="4" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/550d88af-9da9-4762-a75b-c5aa84987f95">
+
+
 Denna uppgift går ut på att skapa en e-handel, som fungerar både för administratörer och kunder. Administratörer ska kunna lägga till och redigera produkter som sedan visas för användaren. Användaren sk kunna välja produkter och lägga i sin varukorg för att sedan gå igenom betalningen för att skapa en order i systemet, som administratören senare kan se.
 
 ## Kraven för denna uppgift:
