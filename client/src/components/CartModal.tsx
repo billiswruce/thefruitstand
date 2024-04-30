@@ -64,11 +64,12 @@ export const Cart = () => {
       if (response.ok) {
         const responseData = await response.json();
         clearCart();
-        // Tömmer input-fälten här efter att ordern har skapats framgångsrikt
         setEmail("");
         setName("");
         setAddress("");
-        alert("Thank you for your booking! Order ID: " + responseData._id);
+        alert(
+          "Thank you for your booking!\n" + "Order ID: " + responseData._id
+        );
       } else {
         const errorResponse = await response.json();
         alert("Failed to create order: " + errorResponse.message);
