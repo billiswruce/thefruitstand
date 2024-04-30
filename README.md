@@ -5,6 +5,7 @@
 <img width="1680" alt="2" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/43e77745-4be8-41ff-9e5e-13cb1d62bf09">
 <img width="1680" alt="5" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/8bdb4f43-efab-420e-9295-e68d9925bca7">
 <img width="1255" alt="4" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/550d88af-9da9-4762-a75b-c5aa84987f95">
+<img width="1671" alt="8" src="https://github.com/Medieinstitutet/uppgift-1-billiswruce/assets/98770226/826995f6-344c-473a-887a-eaa5e5d94158">
 
 
 Denna uppgift går ut på att skapa en e-handel, som fungerar både för administratörer och kunder. Administratörer ska kunna lägga till och redigera produkter som sedan visas för användaren. Användaren sk kunna välja produkter och lägga i sin varukorg för att sedan gå igenom betalningen för att skapa en order i systemet, som administratören senare kan se.
