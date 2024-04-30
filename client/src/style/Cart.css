@@ -82,10 +82,18 @@
 }
 
 .cart-button svg {
-  fill: #4e6d4e;
+  fill: #91a491;
+  height: 25px;
+}
+.cart-button:hover {
+  background-color: #aab5aa;
+}
+
+.cart-button:hover svg {
+  fill: white;
 }
 
 .scrollable-cart {
-  max-height: 600px; /* Ändra detta värde till önskad höjd */
+  max-height: 600px;
   overflow-y: auto;
 }
