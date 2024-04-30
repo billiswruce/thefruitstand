@@ -77,9 +77,15 @@
 }
 
 .form-spacing {
-  margin-bottom: 30px;
+  margin: 20px;
+  padding: 5px;
 }
 
 .cart-button svg {
   fill: #4e6d4e;
+}
+
+.scrollable-cart {
+  max-height: 600px; /* Ändra detta värde till önskad höjd */
+  overflow-y: auto;
 }

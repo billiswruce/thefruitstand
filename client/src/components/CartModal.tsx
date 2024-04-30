@@ -29,6 +29,10 @@ export const Cart = () => {
     cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
 
   const payOrder = async () => {
+    if (!email || !name || !address) {
+      alert("Please fill in all the fields before paying.");
+      return;
+    }
     const cartItems = cart.map((item) => ({
       productId: item.product._id,
       quantity: item.quantity,
@@ -83,7 +87,7 @@ export const Cart = () => {
         <Modal.Header closeButton>
           <Modal.Title>Your Cart</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="modal-container">
+        <Modal.Body className="modal-container scrollable-cart">
           {cart.length > 0 ? (
             cart.map((item) => (
               <div key={item.product._id} className="cart-item">
@@ -117,29 +121,30 @@ export const Cart = () => {
             <p className="empty-cart">Cart is empty</p>
           )}
           <h5>Total: {totalSum()} SEK</h5>
-          <Form>
-            <Form.Group className="form-spacing">
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-              />
-              <Form.Control
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your name"
-              />
-              <Form.Control
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Enter your address"
-              />
-            </Form.Group>
-          </Form>
         </Modal.Body>
+        <Form>
+          <Form.Group className="form-spacing">
+            <Form.Label>Fill in your details before paying:</Form.Label>
+            <Form.Control
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name"
+            />
+            <Form.Control
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+            <Form.Control
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Address"
+            />
+          </Form.Group>
+        </Form>
         <Modal.Footer>
           <Button variant="light" onClick={payOrder} className="pay-button">
             Pay!
