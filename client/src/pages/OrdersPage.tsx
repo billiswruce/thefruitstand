@@ -26,7 +26,7 @@ function OrdersList() {
   };
 
   return (
-    <div>
+    <div className="orders-list">
       <div className="header">
         <img src={ordersImg} alt="orders-logo" className="orders-img" />
         <Link to="/admin" className="btn btn-light mb-3">
