@@ -35,7 +35,6 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
-    // lineItems: [lineItemsSchema],
   },
   { timestamps: true }
 );
