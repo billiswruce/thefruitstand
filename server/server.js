@@ -1,16 +1,16 @@
-const express = require("express");
-const app = express();
-const colors = require("colors");
-const mongoose = require("mongoose");
 const url = "mongodb://localhost:27017/shop";
-const Customers = require("./models/customers");
+const express = require("express");
+const mongoose = require("mongoose");
+const colors = require("colors");
 const Product = require("./models/products");
 const Orders = require("./models/orders");
 const LineItems = require("./models/lineItems");
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+////////PRODUCTS////////
 app.post("/create-product", async (req, res) => {
   try {
     const { name, description, price, image, inStock, status } = req.body;
@@ -74,6 +74,7 @@ app.delete("/delete-product/:id", async (request, response) => {
   }
 });
 
+/////////ORDERS////////
 app.post("/create-order", async (req, res) => {
   console.log("Received create-order:", req.body);
   const {
@@ -166,8 +167,8 @@ app.get("/orders", async (req, res) => {
       },
     ];
 
-    const ordersWithDetails = await Orders.aggregate(pipeline);
-    res.json(ordersWithDetails);
+    const orders = await Orders.aggregate(pipeline);
+    res.json(orders);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });

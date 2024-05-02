@@ -6,7 +6,7 @@ import { IProduct } from "../models/IProduct";
 import "../style/Cart.css";
 
 export const Cart = () => {
-  const { cart, increaseCart, decreaseCart, deleteCart, clearCart } = useCart(); // Antag att clearCart nu är tillgänglig från useCart
+  const { cart, increaseCart, decreaseCart, deleteCart, clearCart } = useCart();
   const [openCart, setOpenCart] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
